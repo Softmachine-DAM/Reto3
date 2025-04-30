@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 5.2.1
+- https://www.phpmyadmin.net
+-
+- Servidor: 127.0.0.1
+- Tiempo de generación: 30-04-2025 a las 12:59:02
+- Versión del servidor: 10.4.32-MariaDB
+- Versión de PHP: 8.2.12
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="https://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="biblioteca" collation="utf8mb4_general_ci" charset="utf8mb4">
+            <pma:table name="autores">
+                CREATE TABLE `autores` (
+                  `id_autor` int(9) NOT NULL,
+                  `nombre` varchar(50) NOT NULL,
+                  `apellidos` varchar(50) NOT NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+            </pma:table>
+            <pma:table name="clientes_1">
+                CREATE TABLE `clientes_1` (
+                  `Nombre` varchar(30) NOT NULL,
+                  `Apellidos` varchar(30) NOT NULL,
+                  `Correo` varchar(30) NOT NULL,
+                  `Telefono` int(9) NOT NULL,
+                  `Contraseña` varchar(255) NOT NULL,
+                  `ID` int(9) NOT NULL AUTO_INCREMENT,
+                  PRIMARY KEY (`ID`),
+                  UNIQUE KEY `Correo` (`Correo`),
+                  UNIQUE KEY `Correo_2` (`Correo`),
+                  UNIQUE KEY `Telefono` (`Telefono`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+            </pma:table>
+            <pma:table name="editoriales">
+                CREATE TABLE `editoriales` (
+                  `id_editorial` int(9) NOT NULL,
+                  `nombre_editorial` varchar(100) NOT NULL,
+                  `pais` varchar(50) NOT NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+            </pma:table>
+            <pma:table name="empleados">
+                CREATE TABLE `empleados` (
+                  `id_empleado` int(9) NOT NULL,
+                  `nombre` varchar(50) NOT NULL,
+                  `rol` varchar(50) NOT NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+            </pma:table>
+            <pma:table name="libros">
+                CREATE TABLE `libros` (
+                  `id_libro` int(9) NOT NULL,
+                  `titulo` varchar(100) NOT NULL,
+                  `anio_publicacion` int(4) NOT NULL,
+                  `genero` varchar(50) NOT NULL,
+                  `id_editorial` int(25) NOT NULL,
+                  `id_categoria` int(9) NOT NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+            </pma:table>
+            <pma:table name="libros_autores">
+                CREATE TABLE `libros_autores` (
+                  `id_libro` int(9) NOT NULL,
+                  `id_autor` int(9) NOT NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+            </pma:table>
+            <pma:table name="prestamos">
+                CREATE TABLE `prestamos` (
+                  `id_prestamo` int(9) NOT NULL,
+                  `id_usuario` int(9) NOT NULL,
+                  `id_libro` int(9) NOT NULL,
+                  `fecha_inicio` date NOT NULL,
+                  `fecha_fin` date NOT NULL,
+                  `devuelto` tinyint(1) NOT NULL,
+                  `multa_por_retraso` int(9) NOT NULL,
+                  `renovado` tinyint(1) NOT NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+            </pma:table>
+            <pma:table name="quejas">
+                CREATE TABLE `quejas` (
+                  `ID` int(9) NOT NULL AUTO_INCREMENT,
+                  `Nombre` varchar(30) NOT NULL,
+                  `Correo_Electronico` varchar(30) NOT NULL,
+                  `Asunto` varchar(30) NOT NULL,
+                  `Comentarios` text NOT NULL,
+                  PRIMARY KEY (`ID`),
+                  FULLTEXT KEY `Comentarios` (`Comentarios`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Base de datos: 'biblioteca'
+    -->
+    <database name="biblioteca">
+        <!-- Tabla autores -->
+        <table name="autores">
+            <column name="id_autor">179</column>
+            <column name="nombre">Miguel</column>
+            <column name="apellidos">Cervantes Saavedra</column>
+        </table>
+        <table name="autores">
+            <column name="id_autor">243</column>
+            <column name="nombre">Fernando</column>
+            <column name="apellidos">Rojas Vargas</column>
+        </table>
+        <table name="autores">
+            <column name="id_autor">257</column>
+            <column name="nombre">Federico</column>
+            <column name="apellidos">García Lorca</column>
+        </table>
+        <table name="autores">
+            <column name="id_autor">321</column>
+            <column name="nombre">Joanne</column>
+            <column name="apellidos">Kathleen Rowling</column>
+        </table>
+        <table name="autores">
+            <column name="id_autor">376</column>
+            <column name="nombre">John</column>
+            <column name="apellidos">Michael Crichton</column>
+        </table>
+        <table name="autores">
+            <column name="id_autor">546</column>
+            <column name="nombre">Rick</column>
+            <column name="apellidos">Riordan Russell</column>
+        </table>
+        <table name="autores">
+            <column name="id_autor">564</column>
+            <column name="nombre">Alejandro</column>
+            <column name="apellidos">Dumas Davy de la Pailleterie</column>
+        </table>
+        <table name="autores">
+            <column name="id_autor">827</column>
+            <column name="nombre">Alexandre</column>
+            <column name="apellidos">Dumas Fils</column>
+        </table>
+        <table name="autores">
+            <column name="id_autor">943</column>
+            <column name="nombre">Diego</column>
+            <column name="apellidos">de Mendoza</column>
+        </table>
+        <!-- Tabla clientes_1 -->
+        <table name="clientes_1">
+            <column name="Nombre">Markel</column>
+            <column name="Apellidos">Neila Cruz</column>
+            <column name="Correo">iea2@gmail.com</column>
+            <column name="Telefono">648637434</column>
+            <column name="Contraseña">$2y$10$Eh8m3A9tvj5b5qsGYDHGKugs92KGyQBd1ZYJBpOgp/T1LsZbM.VD6</column>
+            <column name="ID">1</column>
+        </table>
+        <table name="clientes_1">
+            <column name="Nombre">Pepe</column>
+            <column name="Apellidos">Lopez </column>
+            <column name="Correo">pepe@gmail.com</column>
+            <column name="Telefono">34567876</column>
+            <column name="Contraseña">$2y$10$4V3HQUHbTvJYXJ0zz2iAzeQl9OPqAxqh460uHPqFrG3omZqcKeyBW</column>
+            <column name="ID">3</column>
+        </table>
+        <table name="clientes_1">
+            <column name="Nombre">Luis</column>
+            <column name="Apellidos">Lopez Garcia</column>
+            <column name="Correo">Luis@gmail.com</column>
+            <column name="Telefono">654327812</column>
+            <column name="Contraseña">$2y$10$Mx6rr0nsWZ8Q3CVCrezdqOowAPHkCVmezEXvHucerbO1w/D.fl.am</column>
+            <column name="ID">4</column>
+        </table>
+        <table name="clientes_1">
+            <column name="Nombre">Diego</column>
+            <column name="Apellidos">Masip</column>
+            <column name="Correo">diego@gmail.com</column>
+            <column name="Telefono">123456732</column>
+            <column name="Contraseña">$2y$10$lpU0uad3eKpFT5.x4qxVSeN/QcOk87PLI3dXYsaqcgKzOHT/tYIXy</column>
+            <column name="ID">5</column>
+        </table>
+        <table name="clientes_1">
+            <column name="Nombre">Ainhoa</column>
+            <column name="Apellidos">Cruz</column>
+            <column name="Correo">ainhoa@hotmail.com</column>
+            <column name="Telefono">605711695</column>
+            <column name="Contraseña">$2y$10$EpNCjEmXU29XmzPA28qpDeqtb0hwtsnT43VgQf6E4bm2aPdtet3HG</column>
+            <column name="ID">6</column>
+        </table>
+        <table name="clientes_1">
+            <column name="Nombre">Diego</column>
+            <column name="Apellidos">Larrabeiti</column>
+            <column name="Correo">123@gmail.com</column>
+            <column name="Telefono">123456789</column>
+            <column name="Contraseña">$2y$10$kY7bQg6yCx0aKLtEgJdAdOINerEVNqEZhsDVIUm0hLWv/fUHrYJdm</column>
+            <column name="ID">7</column>
+        </table>
+        <table name="clientes_1">
+            <column name="Nombre">1</column>
+            <column name="Apellidos">23</column>
+            <column name="Correo">1234@gmail.com</column>
+            <column name="Telefono">98767856</column>
+            <column name="Contraseña">$2y$10$SwUnOy70oppFxs7/eHidl.gQ9M3h1SiW22l0zvqQa8HNqtvurANly</column>
+            <column name="ID">10</column>
+        </table>
+        <!-- Tabla editoriales -->
+        <table name="editoriales">
+            <column name="id_editorial">1</column>
+            <column name="nombre_editorial">Juan de la Cuesta</column>
+            <column name="pais">España</column>
+        </table>
+        <table name="editoriales">
+            <column name="id_editorial">2</column>
+            <column name="nombre_editorial">Fadrique de Basilea</column>
+            <column name="pais">España</column>
+        </table>
+        <table name="editoriales">
+            <column name="id_editorial">3</column>
+            <column name="nombre_editorial">Editorial Losada</column>
+            <column name="pais">Argentina</column>
+        </table>
+        <table name="editoriales">
+            <column name="id_editorial">4</column>
+            <column name="nombre_editorial">Bloomsbury</column>
+            <column name="pais">Reino Unido</column>
+        </table>
+        <table name="editoriales">
+            <column name="id_editorial">5</column>
+            <column name="nombre_editorial">Alfred A. Knopf</column>
+            <column name="pais">Estados Unidos</column>
+        </table>
+        <table name="editoriales">
+            <column name="id_editorial">6</column>
+            <column name="nombre_editorial">Disney-Hyperion</column>
+            <column name="pais">Estados Unidos</column>
+        </table>
+        <table name="editoriales">
+            <column name="id_editorial">7</column>
+            <column name="nombre_editorial">Firme</column>
+            <column name="pais">Francia</column>
+        </table>
+        <table name="editoriales">
+            <column name="id_editorial">8</column>
+            <column name="nombre_editorial">M. de Guérin</column>
+            <column name="pais">Francia</column>
+        </table>
+        <table name="editoriales">
+            <column name="id_editorial">9</column>
+            <column name="nombre_editorial">Impresores de Juan de la Cuesta</column>
+            <column name="pais">España</column>
+        </table>
+        <!-- Tabla empleados -->
+        <table name="empleados">
+            <column name="id_empleado">250</column>
+            <column name="nombre">Ander</column>
+            <column name="rol">Director General</column>
+        </table>
+        <table name="empleados">
+            <column name="id_empleado">370</column>
+            <column name="nombre">Arkaitz</column>
+            <column name="rol">Mantenimiento General</column>
+        </table>
+        <table name="empleados">
+            <column name="id_empleado">450</column>
+            <column name="nombre">Beñat</column>
+            <column name="rol">Bibliotecario</column>
+        </table>
+        <table name="empleados">
+            <column name="id_empleado">800</column>
+            <column name="nombre">Markel</column>
+            <column name="rol">Informático</column>
+        </table>
+        <!-- Tabla libros -->
+        <table name="libros">
+            <column name="id_libro">178</column>
+            <column name="titulo">Don Quijote de la Mancha</column>
+            <column name="anio_publicacion">1605</column>
+            <column name="genero">Aventura, Realista</column>
+            <column name="id_editorial">1</column>
+            <column name="id_categoria">20</column>
+        </table>
+        <table name="libros">
+            <column name="id_libro">242</column>
+            <column name="titulo">La Celestina</column>
+            <column name="anio_publicacion">1499</column>
+            <column name="genero">Comedia, drama</column>
+            <column name="id_editorial">2</column>
+            <column name="id_categoria">21</column>
+        </table>
+        <table name="libros">
+            <column name="id_libro">256</column>
+            <column name="titulo">la casa de Bernarda Alba</column>
+            <column name="anio_publicacion">1945</column>
+            <column name="genero">Drama, tragedia</column>
+            <column name="id_editorial">3</column>
+            <column name="id_categoria">22</column>
+        </table>
+        <table name="libros">
+            <column name="id_libro">320</column>
+            <column name="titulo">Harry Potter y la piedra filosofal</column>
+            <column name="anio_publicacion">1997</column>
+            <column name="genero">Fantasía, aventuras</column>
+            <column name="id_editorial">4</column>
+            <column name="id_categoria">23</column>
+        </table>
+        <table name="libros">
+            <column name="id_libro">375</column>
+            <column name="titulo">Jurassic Park</column>
+            <column name="anio_publicacion">1993</column>
+            <column name="genero">Ciencia ficción</column>
+            <column name="id_editorial">5</column>
+            <column name="id_categoria">24</column>
+        </table>
+        <table name="libros">
+            <column name="id_libro">545</column>
+            <column name="titulo">Percy Jackson y el ladrón del rayo</column>
+            <column name="anio_publicacion">2005</column>
+            <column name="genero">Fantasía</column>
+            <column name="id_editorial">6</column>
+            <column name="id_categoria">25</column>
+        </table>
+        <table name="libros">
+            <column name="id_libro">563</column>
+            <column name="titulo">Los tres mosqueteros</column>
+            <column name="anio_publicacion">1844</column>
+            <column name="genero">Histórica</column>
+            <column name="id_editorial">7</column>
+            <column name="id_categoria">26</column>
+        </table>
+        <table name="libros">
+            <column name="id_libro">826</column>
+            <column name="titulo">La dama de las camelias</column>
+            <column name="anio_publicacion">1848</column>
+            <column name="genero">Realismo, ficción romántica</column>
+            <column name="id_editorial">8</column>
+            <column name="id_categoria">27</column>
+        </table>
+        <table name="libros">
+            <column name="id_libro">942</column>
+            <column name="titulo">El Lazarillo de Tormes</column>
+            <column name="anio_publicacion">1554</column>
+            <column name="genero">Novela picaresca</column>
+            <column name="id_editorial">9</column>
+            <column name="id_categoria">28</column>
+        </table>
+        <!-- Tabla libros_autores -->
+        <table name="libros_autores">
+            <column name="id_libro">178</column>
+            <column name="id_autor">179</column>
+        </table>
+        <table name="libros_autores">
+            <column name="id_libro">242</column>
+            <column name="id_autor">243</column>
+        </table>
+        <table name="libros_autores">
+            <column name="id_libro">256</column>
+            <column name="id_autor">257</column>
+        </table>
+        <table name="libros_autores">
+            <column name="id_libro">320</column>
+            <column name="id_autor">321</column>
+        </table>
+        <table name="libros_autores">
+            <column name="id_libro">375</column>
+            <column name="id_autor">376</column>
+        </table>
+        <table name="libros_autores">
+            <column name="id_libro">545</column>
+            <column name="id_autor">546</column>
+        </table>
+        <table name="libros_autores">
+            <column name="id_libro">563</column>
+            <column name="id_autor">564</column>
+        </table>
+        <table name="libros_autores">
+            <column name="id_libro">826</column>
+            <column name="id_autor">827</column>
+        </table>
+        <table name="libros_autores">
+            <column name="id_libro">942</column>
+            <column name="id_autor">943</column>
+        </table>
+        <!-- Tabla prestamos -->
+        <table name="prestamos">
+            <column name="id_prestamo">178</column>
+            <column name="id_usuario">55</column>
+            <column name="id_libro">545</column>
+            <column name="fecha_inicio">2025-02-05</column>
+            <column name="fecha_fin">2025-02-16</column>
+            <column name="devuelto">0</column>
+            <column name="multa_por_retraso">12</column>
+            <column name="renovado">1</column>
+        </table>
+        <table name="prestamos">
+            <column name="id_prestamo">276</column>
+            <column name="id_usuario">52</column>
+            <column name="id_libro">256</column>
+            <column name="fecha_inicio">2025-05-08</column>
+            <column name="fecha_fin">2025-05-19</column>
+            <column name="devuelto">0</column>
+            <column name="multa_por_retraso">12</column>
+            <column name="renovado">1</column>
+        </table>
+        <table name="prestamos">
+            <column name="id_prestamo">467</column>
+            <column name="id_usuario">51</column>
+            <column name="id_libro">242</column>
+            <column name="fecha_inicio">2025-04-10</column>
+            <column name="fecha_fin">2025-04-20</column>
+            <column name="devuelto">1</column>
+            <column name="multa_por_retraso">0</column>
+            <column name="renovado">0</column>
+        </table>
+        <table name="prestamos">
+            <column name="id_prestamo">469</column>
+            <column name="id_usuario">53</column>
+            <column name="id_libro">320</column>
+            <column name="fecha_inicio">2025-01-01</column>
+            <column name="fecha_fin">2025-01-13</column>
+            <column name="devuelto">0</column>
+            <column name="multa_por_retraso">18</column>
+            <column name="renovado">2</column>
+        </table>
+        <table name="prestamos">
+            <column name="id_prestamo">541</column>
+            <column name="id_usuario">54</column>
+            <column name="id_libro">375</column>
+            <column name="fecha_inicio">2025-05-08</column>
+            <column name="fecha_fin">2025-05-20</column>
+            <column name="devuelto">1</column>
+            <column name="multa_por_retraso">0</column>
+            <column name="renovado">0</column>
+        </table>
+        <table name="prestamos">
+            <column name="id_prestamo">589</column>
+            <column name="id_usuario">57</column>
+            <column name="id_libro">826</column>
+            <column name="fecha_inicio">2025-04-10</column>
+            <column name="fecha_fin">2025-04-18</column>
+            <column name="devuelto">0</column>
+            <column name="multa_por_retraso">12</column>
+            <column name="renovado">2</column>
+        </table>
+        <table name="prestamos">
+            <column name="id_prestamo">620</column>
+            <column name="id_usuario">50</column>
+            <column name="id_libro">178</column>
+            <column name="fecha_inicio">2025-04-10</column>
+            <column name="fecha_fin">2025-04-22</column>
+            <column name="devuelto">0</column>
+            <column name="multa_por_retraso">8</column>
+            <column name="renovado">1</column>
+        </table>
+        <table name="prestamos">
+            <column name="id_prestamo">879</column>
+            <column name="id_usuario">58</column>
+            <column name="id_libro">942</column>
+            <column name="fecha_inicio">2025-02-05</column>
+            <column name="fecha_fin">2025-02-21</column>
+            <column name="devuelto">1</column>
+            <column name="multa_por_retraso">0</column>
+            <column name="renovado">1</column>
+        </table>
+        <table name="prestamos">
+            <column name="id_prestamo">965</column>
+            <column name="id_usuario">56</column>
+            <column name="id_libro">563</column>
+            <column name="fecha_inicio">2025-01-01</column>
+            <column name="fecha_fin">2025-01-17</column>
+            <column name="devuelto">1</column>
+            <column name="multa_por_retraso">0</column>
+            <column name="renovado">1</column>
+        </table>
+        <!-- Tabla quejas -->
+        <table name="quejas">
+            <column name="ID">1</column>
+            <column name="Nombre">Markel Neila Cruz</column>
+            <column name="Correo_Electronico">iea2@gmail.com</column>
+            <column name="Asunto">Dudas</column>
+            <column name="Comentarios">Dia de esto</column>
+        </table>
+        <table name="quejas">
+            <column name="ID">6</column>
+            <column name="Nombre">A</column>
+            <column name="Correo_Electronico">123@gmail.com</column>
+            <column name="Asunto">duda</column>
+            <column name="Comentarios">1234</column>
+        </table>
+        <table name="quejas">
+            <column name="ID">7</column>
+            <column name="Nombre">1</column>
+            <column name="Correo_Electronico">23@gmail.com</column>
+            <column name="Asunto">dudas</column>
+            <column name="Comentarios">123456</column>
+        </table>
+    </database>
+</pma_xml_export>
