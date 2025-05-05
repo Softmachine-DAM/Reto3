@@ -29,6 +29,13 @@ public class conexion{
                 System.out.println("2. Actualizar Autor");
                 System.out.println("3. Eliminar Autor");
                 System.out.println("4. Ver Autor");
+                int opcion1 = scanner.nextInt();
+                scanner.nextLine();
+                switch (opcion1){
+                    case 1:
+                    
+                    break;
+                }
                 break;
                 case 2:
                 System.out.println("Elige una opción:");
@@ -36,6 +43,8 @@ public class conexion{
                 System.out.println("2. Actualizar Cliente");
                 System.out.println("3. Eliminar Cliente");
                 System.out.println("4. Ver Cliente");
+                int opcion2 = scanner.nextInt();
+                scanner.nextLine();
                 break;
                 case 3:
                 System.out.println("Elige una opción:");
@@ -43,6 +52,8 @@ public class conexion{
                 System.out.println("2. Actualizar Editorial");
                 System.out.println("3. Eliminar Editorial");
                 System.out.println("4. Ver Editorial");
+                int opcion3 = scanner.nextInt();
+                scanner.nextLine();
                 break;
                 case 4:
                 System.out.println("Elige una opción:");
@@ -50,6 +61,8 @@ public class conexion{
                 System.out.println("2. Actualizar Ejemplares");
                 System.out.println("3. Eliminar Ejemplares");
                 System.out.println("4. Ver Ejemplares");
+                int opcion4 = scanner.nextInt();
+                scanner.nextLine();
                 break;
                 case 5:
                 System.out.println("Elige una opción:");
@@ -57,6 +70,8 @@ public class conexion{
                 System.out.println("2. Actualizar Empleados");
                 System.out.println("3. Eliminar Empleados");
                 System.out.println("4. Ver Empleados");
+                int opcion5 = scanner.nextInt();
+                scanner.nextLine();
                 break;
                 case 6:
                 System.out.println("Elige una opción:");
@@ -79,7 +94,7 @@ public class conexion{
                 System.out.println("3. Eliminar Queja");
                 System.out.println("4. Ver Quejas");
                 break;
-                
+
                 default:
                     System.out.println("Opción no válida.");
             }
