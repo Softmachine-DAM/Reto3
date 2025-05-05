@@ -33,7 +33,11 @@ public class conexion{
                 scanner.nextLine();
                 switch (opcion1){
                     case 1:
-                    
+                    String str = "INSERT INTO autores(nombre,apellidos)";
+                    str+= "VALUES ('Jose Manuel','Fernandez')";
+                    Statement stmt=conn.createStatement();
+                    stmt.executeUpdate(str);
+                    System.out.println("Registro Añadido");
                     break;
                 }
                 break;
