@@ -33,8 +33,14 @@ public class conexion{
                 scanner.nextLine();
                 switch (opcion1){
                     case 1:
+                    System.out.println("Introduce el nombre del autor");
+                    String nombre = scanner.next();
+                    scanner.nextLine();
+                    System.out.println("Introduce los apellidos del autor");
+                    String apellidos = scanner.next();
+                    scanner.nextLine();
                     String str = "INSERT INTO autores(nombre,apellidos)";
-                    str+= "VALUES ('Jose Manuel','Fernandez')";
+                    str+= "VALUES ('"+ nombre +"','"+ apellidos +"')";
                     Statement stmt=conn.createStatement();
                     stmt.executeUpdate(str);
                     System.out.println("Registro Añadido");
