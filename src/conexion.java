@@ -1,7 +1,9 @@
 import java.sql.*;
+import java.util.Scanner;
 
 public class conexion{
     public static void main(String[]args){
+        Scanner scanner = new Scanner(System.in);
         String url="jdbc:mysql://127.0.0.1:3306/biblioteca";
         String user="Grupo3";
         String password="Reto3";
@@ -9,30 +11,78 @@ public class conexion{
             //CONEXION A LA BASE DE DATOS
             Connection conn = DriverManager.getConnection(url,user,password);
             System.out.println("Conexion exitosa a la base de datos");
-            String str="INSERT INTO empleados";
-            str+= "(id_empleado,nombre,rol)";
-            str+= "VALUES ('"+(int)(Math.random()*1000)+"','Jose','Barrendero')";
-            System.out.println(str);
-            Statement stmt=conn.createStatement();
-            stmt.executeUpdate(str);
-            System.out.println("Registro Añadido");
-            String sql="DELETE FROM empleados WHERE nombre = 'Jose'";
-            stmt.executeUpdate(sql);
-            System.out.println("Registro Eliminado");
-            String upd="UPDATE empleados SET rol = 'Bibliotecario' WHERE nombre = 'Alberto'";
-            stmt.executeUpdate(upd);
-            System.out.println("Registro Actualizado");
-            ResultSet rs = stmt.executeQuery("SELECT * FROM empleados");
-
-            while (rs.next()) {
-            int id_empleado = rs.getInt("id_empleado");
-            String nombre = rs.getString("nombre");
-            String rol = rs.getString("rol");
-
-            System.out.println("ID: " + id_empleado + ", Nombre: " + nombre + ", Rol: " + rol);
-}
-
-            conn.close();
+            System.out.println("Elige una opción:");
+            System.out.println("1. Autores");
+            System.out.println("2. Clientes");
+            System.out.println("3. Editoriales");
+            System.out.println("4. Ejemplares");
+            System.out.println("5. Empleados");
+            System.out.println("6. Libros");
+            System.out.println("7. Prestamos");
+            System.out.println("8. Quejas");
+            int tabla = scanner.nextInt();
+            scanner.nextLine();
+            switch (tabla){
+                case 1:
+                System.out.println("Elige una opción:");
+                System.out.println("1. Insertar Autor");
+                System.out.println("2. Actualizar Autor");
+                System.out.println("3. Eliminar Autor");
+                System.out.println("4. Ver Autor");
+                break;
+                case 2:
+                System.out.println("Elige una opción:");
+                System.out.println("1. Insertar Cliente");
+                System.out.println("2. Actualizar Cliente");
+                System.out.println("3. Eliminar Cliente");
+                System.out.println("4. Ver Cliente");
+                break;
+                case 3:
+                System.out.println("Elige una opción:");
+                System.out.println("1. Insertar Editorial");
+                System.out.println("2. Actualizar Editorial");
+                System.out.println("3. Eliminar Editorial");
+                System.out.println("4. Ver Editorial");
+                break;
+                case 4:
+                System.out.println("Elige una opción:");
+                System.out.println("1. Insertar Ejemplares");
+                System.out.println("2. Actualizar Ejemplares");
+                System.out.println("3. Eliminar Ejemplares");
+                System.out.println("4. Ver Ejemplares");
+                break;
+                case 5:
+                System.out.println("Elige una opción:");
+                System.out.println("1. Insertar Empleados");
+                System.out.println("2. Actualizar Empleados");
+                System.out.println("3. Eliminar Empleados");
+                System.out.println("4. Ver Empleados");
+                break;
+                case 6:
+                System.out.println("Elige una opción:");
+                System.out.println("1. Insertar Libro");
+                System.out.println("2. Actualizar Libro");
+                System.out.println("3. Eliminar Libro");
+                System.out.println("4. Ver Libros");
+                break;
+                case 7:
+                System.out.println("Elige una opción:");
+                System.out.println("1. Insertar Prestamo");
+                System.out.println("2. Actualizar Prestamo");
+                System.out.println("3. Eliminar Prestamo");
+                System.out.println("4. Ver Prestamos");
+                break;
+                case 8:
+                System.out.println("Elige una opción:");
+                System.out.println("1. Insertar Queja");
+                System.out.println("2. Actualizar Queja");
+                System.out.println("3. Eliminar Queja");
+                System.out.println("4. Ver Quejas");
+                break;
+                
+                default:
+                    System.out.println("Opción no válida.");
+            }
         }catch(SQLException e){
             e.printStackTrace();
         }
