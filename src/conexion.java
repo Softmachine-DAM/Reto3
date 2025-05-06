@@ -11,6 +11,35 @@ public class conexion{
             //CONEXION A LA BASE DE DATOS
             Connection conn = DriverManager.getConnection(url,user,password);
             System.out.println("Conexion exitosa a la base de datos");
+            //LOGIN
+            int opcion = 0;
+            do {
+                System.out.println("Bienvenido");
+                System.out.println("Elige tu tipo de Usuario:");
+                System.out.println("1. Clientes");
+                System.out.println("2. Empleados");
+                System.out.println("3. Salir");
+                opcion = scanner.nextInt();
+                scanner.nextLine();
+                switch (opcion) {
+                    case 1:
+                        System.out.println("Introduce tu Usuario:");
+                        String Usuario = scanner.nextLine();
+                        System.out.println("Introduce tu Contraseña:");
+                        String Contraseña = scanner.nextLine();
+                        String str = "SELECT * FROM clientes_1 WHERE Nombre='"+Usuario+"' && Contraseña='"+Contraseña+"'";
+                        break;
+                    case 2:
+
+                        break;
+                    case 3:
+                        System.out.println("Gracias por utilizar el programa");
+                        System.exit(0);
+                        break;
+                    default:
+                        break;
+                }
+            } while (opcion != 3);
             //MENU
             System.out.println("Elige una opción:");
             System.out.println("1. Clientes");
