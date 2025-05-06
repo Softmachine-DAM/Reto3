@@ -23,21 +23,25 @@ public class conexion{
                 scanner.nextLine();
                 switch (opcion) {
                     case 1:
-                        System.out.println("Introduce tu Usuario:");
-                        String Usuario = scanner.nextLine();
-                        System.out.println("Introduce tu Contraseña:");
-                        String Contraseña = scanner.nextLine();
-                        String str = "SELECT * FROM clientes_1 WHERE Nombre='"+Usuario+"' && Contraseña='"+Contraseña+"'";
-                        System.out.println("Inicio de sesion correcto");
+                        if (loginUsuario(conn, "clientes_1", scanner)) {
+                            System.out.println("Inicio de sesión correcto. ¡Bienvenido al portal de clientes!");
+                        } else {
+                            System.out.println("Usuario o contraseña incorrectos.");
+                        }
                         break;
                     case 2:
-
+                        if (loginUsuario(conn, "empleados_1", scanner)) {
+                            System.out.println("Inicio de sesión correcto. ¡Bienvenido al portal de empleados!");
+                        } else {
+                            System.out.println("Usuario o contraseña incorrectos.");
+                        }
                         break;
                     case 3:
                         System.out.println("Gracias por utilizar el programa");
                         System.exit(0);
                         break;
                     default:
+                        System.out.println("Introduzca una opcion valida");
                         break;
                 }
             } while (opcion != 3);
@@ -98,6 +102,23 @@ public class conexion{
             //e.printStackTrace();
             System.out.print("Error en la conexión ");
 
+        }
+    }
+    public static boolean loginUsuario(Connection conn, String tabla, Scanner scanner) {
+        System.out.print("Introduce tu Usuario: ");
+        String usuario = scanner.nextLine();
+        System.out.print("Introduce tu Contraseña: ");
+        String contraseña = scanner.nextLine();
+
+        String query = "SELECT * FROM " + tabla + " WHERE Nombre = ? AND Contraseña = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, usuario);
+            stmt.setString(2, contraseña);
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }
