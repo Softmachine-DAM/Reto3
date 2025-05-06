@@ -8,5 +8,13 @@ public static void usoClientes(){
     }
 public static void insertClientes(){
     
+    switch (key) {
+        case value:
+            
+            break;
+    
+        default:
+            break;
+    }
 }
 }
