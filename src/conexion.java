@@ -30,19 +30,19 @@ public class conexion{
                 switch (opcion1){
                     case 1:
                     System.out.println("Introduce el nombre del Cliente");
-                    String nombre = scanner.next();
+                    String nombre = scanner.nextLine();
                     scanner.nextLine();
                     System.out.println("Introduce los apellidos del Cliente");
-                    String apellidos = scanner.next();
+                    String apellidos = scanner.nextLine();
                     scanner.nextLine();
                     System.out.println("Introduce el correo del Cliente");
                     String correo = scanner.next();
                     scanner.nextLine();
                     System.out.println("Introduce el telefono del Cliente");
-                    String telefono = scanner.next();
+                    String telefono = scanner.nextLine();
                     scanner.nextLine();
                     System.out.println("Introduce la contraseña");
-                    String contraseña = scanner.next();
+                    String contraseña = scanner.nextLine();
                     scanner.nextLine();
                     String str = "INSERT INTO clientes_1(Nombre,Apellidos,Correo,Telefono,Contraseña)";
                     str+= "VALUES ('"+ nombre +"','"+ apellidos +"','"+ correo +"','"+ telefono +"','"+ contraseña +"')";
@@ -72,10 +72,10 @@ public class conexion{
                 switch(opcion2){
                     case 1:
                     System.out.println("Introduce el estado del ejemplar");
-                    String estado = scanner.next();
+                    String estado = scanner.nextLine();
                     scanner.nextLine();
                     System.out.println("Introduce el codigo del ejemplar");
-                    String cod_libro = scanner.next();
+                    String cod_libro = scanner.nextLine();
                     scanner.nextLine();
                     String str="INSERT INTO ejemplares";
                     str+="VALUES('"+estado+"',"+cod_libro+"')";
