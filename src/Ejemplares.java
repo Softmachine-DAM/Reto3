@@ -18,17 +18,17 @@ public class Ejemplares {
             Connection conn = DriverManager.getConnection(url,user,password);
             System.out.println("Introduce el estado del ejemplar");
                     String estado = scanner.nextLine();
-                    scanner.nextLine();
+                    scanner.next();
                     System.out.println("Introduce el codigo del ejemplar");
                     String cod_libro = scanner.nextLine();
-                    scanner.nextLine();
+                    scanner.next();
                     String str="INSERT INTO ejemplares";
                     str+="VALUES('"+estado+"',"+cod_libro+"')";
                     Statement stmt=conn.createStatement();
                     stmt.executeUpdate(str);
                     System.out.println("Ejemplar Añadido");
                 }catch(SQLException e){
-
+                    System.out.println("Error al insertar ejemplares");
                 }
     }
 }

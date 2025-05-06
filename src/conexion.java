@@ -12,35 +12,35 @@ public class conexion{
             Connection conn = DriverManager.getConnection(url,user,password);
             System.out.println("Conexion exitosa a la base de datos");
             //LOGIN
-            // int opcion = 0;
-            // do {
-            //     System.out.println("Bienvenido");
-            //     System.out.println("Elige tu tipo de Usuario:");
-            //     System.out.println("1. Clientes");
-            //     System.out.println("2. Empleados");
-            //     System.out.println("3. Salir");
-            //     opcion = scanner.nextInt();
-            //     scanner.nextLine();
-            //     switch (opcion) {
-            //         case 1:
-            //             System.out.println("Introduce tu Usuario:");
-            //             String Usuario = scanner.nextLine();
-            //             System.out.println("Introduce tu Contraseña:");
-            //             String Contraseña = scanner.nextLine();
-            //             String str = "SELECT * FROM clientes_1 WHERE Nombre='"+Usuario+"' && Contraseña='"+Contraseña+"'";
-            //             System.out.println("Inicio de sesion correcto");
-            //             break;
-            //         case 2:
+            int opcion = 0;
+            do {
+                System.out.println("Bienvenido");
+                System.out.println("Elige tu tipo de Usuario:");
+                System.out.println("1. Clientes");
+                System.out.println("2. Empleados");
+                System.out.println("3. Salir");
+                opcion = scanner.nextInt();
+                scanner.nextLine();
+                switch (opcion) {
+                    case 1:
+                        System.out.println("Introduce tu Usuario:");
+                        String Usuario = scanner.nextLine();
+                        System.out.println("Introduce tu Contraseña:");
+                        String Contraseña = scanner.nextLine();
+                        String str = "SELECT * FROM clientes_1 WHERE Nombre='"+Usuario+"' && Contraseña='"+Contraseña+"'";
+                        System.out.println("Inicio de sesion correcto");
+                        break;
+                    case 2:
 
-            //             break;
-            //         case 3:
-            //             System.out.println("Gracias por utilizar el programa");
-            //             System.exit(0);
-            //             break;
-            //         default:
-            //             break;
-            //     }
-            // } while (opcion != 3);
+                        break;
+                    case 3:
+                        System.out.println("Gracias por utilizar el programa");
+                        System.exit(0);
+                        break;
+                    default:
+                        break;
+                }
+            } while (opcion != 3);
             //MENU
             System.out.println("Elige una opción:");
             System.out.println("1. Clientes");
@@ -56,7 +56,7 @@ public class conexion{
                 if(opcion1==1){
                     Cliente.insertClientes();
                 }else if(opcion1==2){
-
+                    
                 }else if(opcion1==3){
 
                 }else{
@@ -68,29 +68,26 @@ public class conexion{
                 int opcion2 = scanner.nextInt();
                 scanner.nextLine();
                 if(opcion2==1){
-                    
+                    Ejemplares.inserEjemplares();
+                }else if(opcion2==2){
+
+                }else if(opcion2==3){
+
+                }else{
+
                 }
                 case 3:
-                System.out.println("Elige una opción:");
-                System.out.println("1. Insertar Empleados");
-                System.out.println("2. Actualizar Empleados");
-                System.out.println("3. Eliminar Empleados");
-                System.out.println("4. Ver Empleados");
+                Empleados.usoEmpleados();
                 int opcion3 = scanner.nextInt();
                 scanner.nextLine();
-                switch(opcion3){
-                    case 1:
+                if(opcion3==1){
+                    Empleados.insertEmpleados();
+                }else if(opcion3==2){
 
-                    break;
-                    case 2:
+                }else if(opcion3==3){
 
-                    break;
-                    case 3:
+                }else{
 
-                    break;
-                    case 4:
-
-                    break;
                 }
                 break;
                 default:

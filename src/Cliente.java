@@ -40,7 +40,7 @@ public static void insertClientes(){
                     stmt.executeUpdate(str);
                     System.out.println("Registro Añadido");
                 }catch(SQLException e){
-                    System.out.println("Error al insertar datos");
+                    System.out.println("Error al insertar clientes");
             }
         }
 }

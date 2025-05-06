@@ -5,5 +5,8 @@ public class Empleados {
         System.out.println("2. Actualizar Empleado");
         System.out.println("3. Eliminar Empleado");
         System.out.println("4. Ver Empleados");
-}
+    }
+    public static void insertEmpleados(){
+        
+    }
 }
