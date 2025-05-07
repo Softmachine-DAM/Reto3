@@ -114,8 +114,8 @@ public class conexion{
         System.out.print("Introduce tu Contraseña: ");
         String contraseña = scanner.nextLine();
 
-        String query = "SELECT * FROM " + tabla + " WHERE Nombre = ? AND Contraseña = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+        String str = "SELECT * FROM " + tabla + " WHERE Nombre = ? AND Contraseña = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(str)) {
             stmt.setString(1, usuario);
             stmt.setString(2, contraseña);
             ResultSet rs = stmt.executeQuery();
