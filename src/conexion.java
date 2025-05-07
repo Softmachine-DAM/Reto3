@@ -25,15 +25,19 @@ public class conexion{
                     case 1:
                         if (loginUsuario(conn, "clientes_1", scanner)) {
                             System.out.println("Inicio de sesión correcto. ¡Bienvenido al portal de clientes!");
+                            Cliente.usoClientes();
                         } else {
                             System.out.println("Usuario o contraseña incorrectos.");
+                            System.out.println("Se le enviara al menu principal.");
                         }
                         break;
                     case 2:
                         if (loginUsuario(conn, "empleados_1", scanner)) {
                             System.out.println("Inicio de sesión correcto. ¡Bienvenido al portal de empleados!");
+                            Empleados.usoEmpleados();
                         } else {
                             System.out.println("Usuario o contraseña incorrectos.");
+                            System.out.println("Se le enviara al menu principal.");
                         }
                         break;
                     case 3:
