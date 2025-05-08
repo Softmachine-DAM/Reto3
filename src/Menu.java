@@ -1,5 +1,5 @@
 // import java.sql.*;
-// import java.util.Scanner;
+import java.util.Scanner;
 
 public class Menu {
     public static void menuEmpleados(){

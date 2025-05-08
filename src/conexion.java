@@ -28,6 +28,7 @@ public class conexion{
                             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nInicio de sesión correcto. ¡Bienvenido al portal de clientes!");
                             System.out.println("Pulse ENTER para continuar...");
                             scanner.nextLine();
+                            Menu.menuClientes();
                         } else {
                             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nUsuario o contraseña incorrectos.");
                             System.out.println("Se le enviara al menu principal.");
@@ -40,6 +41,7 @@ public class conexion{
                             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nInicio de sesión correcto. ¡Bienvenido al portal de empleados!");
                             System.out.println("Pulse ENTER para continuar...");
                             scanner.nextLine();
+                            Menu.menuEmpleados();
                         } else {
                             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nUsuario o contraseña incorrectos.");
                             System.out.println("Se le enviara al menu principal.");
