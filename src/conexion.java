@@ -25,19 +25,31 @@ public class conexion{
                     case 1:
                         if (loginUsuario(conn, "clientes_1", scanner)) {
                             System.out.println("Inicio de sesión correcto. ¡Bienvenido al portal de clientes!");
+                            System.out.println("Pulse ENTER para continuar...");
+                            scanner.nextLine();
+                            scanner.nextLine();
                             Cliente.usoClientes();
                         } else {
                             System.out.println("Usuario o contraseña incorrectos.");
                             System.out.println("Se le enviara al menu principal.");
+                            System.out.println("Pulse ENTER para continuar...");
+                            scanner.nextLine();
+                            scanner.nextLine();
                         }
                         break;
                     case 2:
                         if (loginUsuario(conn, "empleados_1", scanner)) {
                             System.out.println("Inicio de sesión correcto. ¡Bienvenido al portal de empleados!");
+                            System.out.println("Pulse ENTER para continuar...");
+                            scanner.nextLine();
+                            scanner.nextLine();
                             Empleados.usoEmpleados();
                         } else {
                             System.out.println("Usuario o contraseña incorrectos.");
                             System.out.println("Se le enviara al menu principal.");
+                            System.out.println("Pulse ENTER para continuar...");
+                            scanner.nextLine();
+                            scanner.nextLine();
                         }
                         break;
                     case 3:
@@ -46,6 +58,9 @@ public class conexion{
                         break;
                     default:
                         System.out.println("Introduzca una opcion valida");
+                        System.out.println("Pulse ENTER para continuar...");
+                        scanner.nextLine();
+                        scanner.nextLine();
                         break;
                 }
             } while (opcion != 3);
