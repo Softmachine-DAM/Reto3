@@ -27,13 +27,11 @@ public class conexion{
                             System.out.println("Inicio de sesión correcto. ¡Bienvenido al portal de clientes!");
                             System.out.println("Pulse ENTER para continuar...");
                             scanner.nextLine();
-                            scanner.nextLine();
                             Cliente.usoClientes();
                         } else {
                             System.out.println("Usuario o contraseña incorrectos.");
                             System.out.println("Se le enviara al menu principal.");
                             System.out.println("Pulse ENTER para continuar...");
-                            scanner.nextLine();
                             scanner.nextLine();
                         }
                         break;
@@ -42,13 +40,11 @@ public class conexion{
                             System.out.println("Inicio de sesión correcto. ¡Bienvenido al portal de empleados!");
                             System.out.println("Pulse ENTER para continuar...");
                             scanner.nextLine();
-                            scanner.nextLine();
                             Empleados.usoEmpleados();
                         } else {
                             System.out.println("Usuario o contraseña incorrectos.");
                             System.out.println("Se le enviara al menu principal.");
                             System.out.println("Pulse ENTER para continuar...");
-                            scanner.nextLine();
                             scanner.nextLine();
                         }
                         break;
@@ -59,7 +55,6 @@ public class conexion{
                     default:
                         System.out.println("Introduzca una opcion valida");
                         System.out.println("Pulse ENTER para continuar...");
-                        scanner.nextLine();
                         scanner.nextLine();
                         break;
                 }
