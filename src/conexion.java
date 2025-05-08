@@ -21,15 +21,15 @@ public class conexion{
                 System.out.println("3. Salir");
                 opcion = scanner.nextInt();
                 scanner.nextLine();
+                System.out.println("\n\n\n\n\n\n\n\n\n\n");
                 switch (opcion) {
                     case 1:
                         if (loginUsuario(conn, "clientes_1", scanner)) {
-                            System.out.println("Inicio de sesión correcto. ¡Bienvenido al portal de clientes!");
+                            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nInicio de sesión correcto. ¡Bienvenido al portal de clientes!");
                             System.out.println("Pulse ENTER para continuar...");
                             scanner.nextLine();
-                            Cliente.usoClientes();
                         } else {
-                            System.out.println("Usuario o contraseña incorrectos.");
+                            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nUsuario o contraseña incorrectos.");
                             System.out.println("Se le enviara al menu principal.");
                             System.out.println("Pulse ENTER para continuar...");
                             scanner.nextLine();
@@ -37,12 +37,11 @@ public class conexion{
                         break;
                     case 2:
                         if (loginUsuario(conn, "empleados_1", scanner)) {
-                            System.out.println("Inicio de sesión correcto. ¡Bienvenido al portal de empleados!");
+                            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nInicio de sesión correcto. ¡Bienvenido al portal de empleados!");
                             System.out.println("Pulse ENTER para continuar...");
                             scanner.nextLine();
-                            Empleados.usoEmpleados();
                         } else {
-                            System.out.println("Usuario o contraseña incorrectos.");
+                            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nUsuario o contraseña incorrectos.");
                             System.out.println("Se le enviara al menu principal.");
                             System.out.println("Pulse ENTER para continuar...");
                             scanner.nextLine();
@@ -53,11 +52,12 @@ public class conexion{
                         System.exit(0);
                         break;
                     default:
-                        System.out.println("Introduzca una opcion valida");
+                        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nIntroduzca una opcion valida");
                         System.out.println("Pulse ENTER para continuar...");
                         scanner.nextLine();
                         break;
                 }
+                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
             } while (opcion != 3);
             //MENU
             System.out.println("Elige una opción:");
@@ -115,7 +115,6 @@ public class conexion{
         }catch(SQLException e){
             //e.printStackTrace();
             System.out.print("Error en la conexión ");
-
         }
     }
     public static boolean loginUsuario(Connection conn, String tabla, Scanner scanner) {
@@ -123,7 +122,6 @@ public class conexion{
         String usuario = scanner.nextLine();
         System.out.print("Introduce tu Contraseña: ");
         String contraseña = scanner.nextLine();
-
         String str = "SELECT * FROM " + tabla + " WHERE Nombre = ? AND Contraseña = ?";
         try (PreparedStatement stmt = conn.prepareStatement(str)) {
             stmt.setString(1, usuario);
@@ -131,7 +129,6 @@ public class conexion{
             ResultSet rs = stmt.executeQuery();
             return rs.next();
         } catch (SQLException e) {
-            e.printStackTrace();
             return false;
         }
     }
