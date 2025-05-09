@@ -13,37 +13,52 @@ public class conexion{
             System.out.println("Conexion exitosa a la base de datos");
             //LOGIN
             int opcion = 0;
+            int id = 0;
+            String contraseña = "";
             do {
-                System.out.println("Bienvenido");
+                System.out.println("\nBienvenido");
                 System.out.println("Elige tu tipo de Usuario:");
                 System.out.println("1. Clientes");
                 System.out.println("2. Empleados");
                 System.out.println("3. Salir");
-                opcion = scanner.nextInt();
-                scanner.nextLine();
+                opcion = validarNumero();
                 System.out.println("\n\n\n\n\n\n\n\n\n\n");
+                if (opcion == 1 || opcion == 2) {
+                    System.out.print("Introduce tu numero ID: ");
+                    id = validarNumero();
+                    if (id != 0) {
+                        System.out.print("Introduce tu Contraseña: ");
+                        contraseña = scanner.nextLine();     
+                    }
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n");
+                }
+                SesionActiva sesion = new SesionActiva(id, contraseña);
                 switch (opcion) {
                     case 1:
-                        if (loginUsuario(conn, "clientes_1", scanner)) {
-                            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nInicio de sesión correcto. ¡Bienvenido al portal de clientes!");
+                        if (id == 0){
+                            System.out.println("No has introducido un numero id valido");
                             System.out.println("Pulse ENTER para continuar...");
                             scanner.nextLine();
-                            Menu.menuClientes();
+                        }else if (loginUsuario(conn, "clientes_1", scanner, sesion, opcion)) {
+                            System.out.println("Inicio de sesión correcto. ¡Bienvenido " + obtenerNombreUsuario(conn, sesion, "clientes_1", opcion) + " al portal de clientes!");
+                            System.out.println("Pulse ENTER para continuar...");
+                            scanner.nextLine();
+                            Menus.menuClientes(sesion);
                         } else {
-                            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nUsuario o contraseña incorrectos.");
+                            System.out.println("Usuario o contraseña incorrectos.");
                             System.out.println("Se le enviara al menu principal.");
                             System.out.println("Pulse ENTER para continuar...");
                             scanner.nextLine();
                         }
                         break;
                     case 2:
-                        if (loginUsuario(conn, "empleados_1", scanner)) {
-                            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nInicio de sesión correcto. ¡Bienvenido al portal de empleados!");
+                        if (loginUsuario(conn, "empleados", scanner, sesion, opcion)) {
+                            System.out.println("Inicio de sesión correcto. ¡Bienvenido " + obtenerNombreUsuario(conn, sesion, "empleados", opcion) + " al portal de empleados!");
                             System.out.println("Pulse ENTER para continuar...");
                             scanner.nextLine();
-                            Menu.menuEmpleados();
+                            Menus.menuEmpleados(sesion);
                         } else {
-                            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nUsuario o contraseña incorrectos.");
+                            System.out.println("Usuario o contraseña incorrectos.");
                             System.out.println("Se le enviara al menu principal.");
                             System.out.println("Pulse ENTER para continuar...");
                             scanner.nextLine();
@@ -54,84 +69,61 @@ public class conexion{
                         System.exit(0);
                         break;
                     default:
-                        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nIntroduzca una opcion valida");
+                        System.out.println("Introduzca una opcion valida");
                         System.out.println("Pulse ENTER para continuar...");
                         scanner.nextLine();
                         break;
                 }
                 System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
             } while (opcion != 3);
-            //MENU
-            System.out.println("Elige una opción:");
-            System.out.println("1. Clientes");
-            System.out.println("2. Ejemplares");
-            System.out.println("3. Empleados");
-            int tabla = scanner.nextInt();
-            scanner.nextLine();
-            switch (tabla){
-                case 1:
-                Cliente.usoClientes();
-                int opcion1 = scanner.nextInt();
-                scanner.nextLine();
-                if(opcion1==1){
-                    Cliente.insertClientes();
-                }else if(opcion1==2){
-                    
-                }else if(opcion1==3){
-
-                }else{
-
-                }
-                break;
-                case 2:
-                Ejemplares.usoEjemplares();
-                int opcion2 = scanner.nextInt();
-                scanner.nextLine();
-                if(opcion2==1){
-                    Ejemplares.inserEjemplares();
-                }else if(opcion2==2){
-
-                }else if(opcion2==3){
-
-                }else{
-
-                }
-                case 3:
-                Empleados.usoEmpleados();
-                int opcion3 = scanner.nextInt();
-                scanner.nextLine();
-                if(opcion3==1){
-                    Empleados.insertEmpleados();
-                }else if(opcion3==2){
-
-                }else if(opcion3==3){
-
-                }else{
-
-                }
-                break;
-                default:
-                    System.out.println("Opción no válida.");
-                    break;
-            }
         }catch(SQLException e){
             //e.printStackTrace();
             System.out.print("Error en la conexión ");
         }
     }
-    public static boolean loginUsuario(Connection conn, String tabla, Scanner scanner) {
-        System.out.print("Introduce tu Usuario: ");
-        String usuario = scanner.nextLine();
-        System.out.print("Introduce tu Contraseña: ");
-        String contraseña = scanner.nextLine();
-        String str = "SELECT * FROM " + tabla + " WHERE Nombre = ? AND Contraseña = ?";
+    public static boolean loginUsuario(Connection conn, String tabla, Scanner scanner, SesionActiva sesion, int opcion) {
+        String str = "";
+        if (opcion == 1) {
+            str = "SELECT * FROM " + tabla + " WHERE ID = ? AND Contraseña = ?";
+        }else{
+            str = "SELECT * FROM " + tabla + " WHERE id_empleado = ? AND contraseña = ?";
+        }
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
         try (PreparedStatement stmt = conn.prepareStatement(str)) {
-            stmt.setString(1, usuario);
-            stmt.setString(2, contraseña);
+            stmt.setInt(1, sesion.getId());
+            stmt.setString(2, sesion.getContraseña());
             ResultSet rs = stmt.executeQuery();
             return rs.next();
         } catch (SQLException e) {
             return false;
         }
+    }
+    public static String obtenerNombreUsuario(Connection conn, SesionActiva sesion, String tabla, int opcion) {
+        String select;
+        if (opcion == 1) {
+            select = "SELECT Nombre FROM " + tabla + " WHERE id = ?";
+        }else{
+            select = "SELECT nombre FROM " + tabla + " WHERE id_empleado = ?";
+        }
+        try (PreparedStatement stmt = conn.prepareStatement(select)) {
+            stmt.setInt(1, sesion.getId());
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("Nombre");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "Usuario desconocido";
+    }
+    public static int validarNumero(){
+        Scanner scanner = new Scanner(System.in);
+        int numero;
+        if (scanner.hasNextInt()) {
+            numero = scanner.nextInt();
+        } else {
+            numero = 0;
+        }
+        return numero;
     }
 }

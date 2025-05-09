@@ -3,32 +3,40 @@ import java.util.Scanner;
 
 public class Ejemplares {
     public static void usoEjemplares(){
-        System.out.println("Elige una opción:");
-        System.out.println("1. Insertar Ejemplar");
-        System.out.println("2. Actualizar Ejemplar");
-        System.out.println("3. Eliminar Ejemplar");
-        System.out.println("4. Ver Ejemplar");
-}
-    public static void inserEjemplares(){
-    String url="jdbc:mysql://127.0.0.1:3306/biblioteca";
-    String user="Grupo3";
-    String password="Reto3";
-    Scanner scanner = new Scanner(System.in);
-    try{
+        Scanner scanner = new Scanner(System.in);
+        int opcionUEJ = 0;
+        do {
+            System.out.println("Elige una opción:");
+            System.out.println("1. Insertar Ejemplar");
+            System.out.println("2. Actualizar Ejemplar");
+            System.out.println("3. Eliminar Ejemplar");
+            System.out.println("4. Ver Ejemplar"); 
+            System.out.println("5. Volver");
+            opcionUEJ = conexion.validarNumero();
+            scanner.nextLine();
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
+        } while (opcionUEJ != 5);
+    }
+    public static void insertEjemplares(){
+        String url="jdbc:mysql://127.0.0.1:3306/biblioteca";
+        String user="Grupo3";
+        String password="Reto3";
+        Scanner scanner = new Scanner(System.in);
+        try{
             Connection conn = DriverManager.getConnection(url,user,password);
             System.out.println("Introduce el estado del ejemplar");
-                    String estado = scanner.nextLine();
-                    scanner.next();
-                    System.out.println("Introduce el codigo del ejemplar");
-                    String cod_libro = scanner.nextLine();
-                    scanner.next();
-                    String str="INSERT INTO ejemplares";
-                    str+="VALUES('"+estado+"',"+cod_libro+"')";
-                    Statement stmt=conn.createStatement();
-                    stmt.executeUpdate(str);
-                    System.out.println("Ejemplar Añadido");
-                }catch(SQLException e){
-                    System.out.println("Error al insertar ejemplares");
-                }
+            String estado = scanner.nextLine();
+            scanner.next();
+            System.out.println("Introduce el codigo del ejemplar");
+            String cod_libro = scanner.nextLine();
+            scanner.next();
+            String str="INSERT INTO ejemplares";
+            str+="VALUES('"+estado+"',"+cod_libro+"')";
+            Statement stmt=conn.createStatement();
+            stmt.executeUpdate(str);
+            System.out.println("Ejemplar Añadido");
+        }catch(SQLException e){
+            System.out.println("Error al insertar ejemplares");
+        }
     }
 }

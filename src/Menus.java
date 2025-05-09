@@ -1,61 +1,34 @@
 // import java.sql.*;
 import java.util.Scanner;
 
-public class Menu {
-    public static void menuEmpleados(){
+public class Menus {
+    public static void menuEmpleados(SesionActiva sesion){
         Scanner scanner = new Scanner(System.in);
         int opcionME = 0;
         do {
-            System.out.println("Elige una opción:");
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nElige una opción:");
             System.out.println("1. Clientes");
             System.out.println("2. Ejemplares");
             System.out.println("3. Empleados");
             System.out.println("4. Cerrar sesion");
-            opcionME = scanner.nextInt();
+            System.out.println(sesion.toString());
+            opcionME = conexion.validarNumero();
             scanner.nextLine();
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
             switch (opcionME){
                 case 1:
                     Cliente.usoClientes();
-                    int opcion1 = scanner.nextInt();
-                    scanner.nextLine();
-                    if(opcion1==1){
-                        Cliente.insertClientes();
-                    }else if(opcion1==2){
-                    
-                    }else if(opcion1==3){
-
-                    }else{
-
-                    }
                     break;
                 case 2:
                     Ejemplares.usoEjemplares();
-                    int opcion2 = scanner.nextInt();
-                    scanner.nextLine();
-                    if(opcion2==1){
-                        Ejemplares.inserEjemplares();
-                    }else if(opcion2==2){
-
-                    }else if(opcion2==3){
-
-                    }else{
-
-                    }
+                    break;
                 case 3:
                     Empleados.usoEmpleados();
-                    int opcion3 = scanner.nextInt();
-                    scanner.nextLine();
-                    if(opcion3==1){
-                        Empleados.insertEmpleados();
-                    }else if(opcion3==2){
-
-                    }else if(opcion3==3){
-
-                    }else{
-
-                    }
                     break;
                 case 4:
+                    sesion.setId(0);
+                    sesion.setContraseña(null);
+                    System.out.println("Se cerró la sesion correctamente");
                     break;
                 default:
                     System.out.println("Opción no válida.");
@@ -63,15 +36,16 @@ public class Menu {
             }
         } while (opcionME != 4);
     }
-    public static void menuClientes(){
+    public static void menuClientes(SesionActiva sesion){
         Scanner scanner = new Scanner(System.in);
         int opcionMC = 0;
         do {
-            System.out.println("Elige una opción:");
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nElige una opción:");
             System.out.println("1. Prestamos pendientes");
             System.out.println("2. Libros disponibles");
             System.out.println("3. Prestar libro");
             System.out.println("4. Cerrar sesion");
+            System.out.println(sesion.toString());
             opcionMC = scanner.nextInt();
             scanner.nextLine();
             switch (opcionMC){
@@ -85,6 +59,9 @@ public class Menu {
                     
                     break;
                 case 4:
+                    sesion.setId(0);
+                    sesion.setContraseña(null);
+                    System.out.println("Se cerró la sesion correctamente");
                     break;
                 default:
                     System.out.println("Opción no válida.");

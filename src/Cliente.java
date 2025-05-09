@@ -2,8 +2,8 @@ import java.util.Scanner;
 import java.sql.*;
 
 public class Cliente{
-
     public static void usoClientes(){
+        Scanner scanner = new Scanner(System.in);
         int opcionUC = 0;
         do {
             System.out.println("Elige una opción:");
@@ -12,6 +12,8 @@ public class Cliente{
             System.out.println("3. Eliminar Cliente");
             System.out.println("4. Ver Clientes");
             System.out.println("5.Volver");
+            opcionUC = conexion.validarNumero();
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
         } while (opcionUC != 5);
     }
     public static void insertClientes(){
