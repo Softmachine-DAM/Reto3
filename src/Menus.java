@@ -6,14 +6,15 @@ public class Menus {
         Scanner scanner = new Scanner(System.in);
         int opcionME = 0;
         do {
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nElige una opción:");
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nPortal de Clientes");
+            System.out.println("******************");
+            System.out.println("Elige una opción:");
             System.out.println("1. Clientes");
             System.out.println("2. Ejemplares");
             System.out.println("3. Empleados");
             System.out.println("4. Cerrar sesion");
             System.out.println(sesion.toString());
             opcionME = conexion.validarNumero();
-            scanner.nextLine();
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
             switch (opcionME){
                 case 1:
@@ -40,14 +41,16 @@ public class Menus {
         Scanner scanner = new Scanner(System.in);
         int opcionMC = 0;
         do {
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nElige una opción:");
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nPortal de Empleados");
+            System.out.println("*******************");
+            System.out.println("Elige una opción:");
             System.out.println("1. Prestamos pendientes");
             System.out.println("2. Libros disponibles");
             System.out.println("3. Prestar libro");
             System.out.println("4. Cerrar sesion");
             System.out.println(sesion.toString());
-            opcionMC = scanner.nextInt();
-            scanner.nextLine();
+            opcionMC = conexion.validarNumero();
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
             switch (opcionMC){
                 case 1:
                     

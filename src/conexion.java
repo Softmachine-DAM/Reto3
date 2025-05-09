@@ -16,7 +16,8 @@ public class conexion{
             int id = 0;
             String contraseña = "";
             do {
-                System.out.println("\nBienvenido");
+                System.out.println("\nBienvenido al servicio de la Biblioteca de Muskiz");
+                System.out.println("*************************************************");
                 System.out.println("Elige tu tipo de Usuario:");
                 System.out.println("1. Clientes");
                 System.out.println("2. Empleados");
@@ -52,7 +53,11 @@ public class conexion{
                         }
                         break;
                     case 2:
-                        if (loginUsuario(conn, "empleados", scanner, sesion, opcion)) {
+                        if (id == 0){
+                            System.out.println("No has introducido un numero id valido");
+                            System.out.println("Pulse ENTER para continuar...");
+                            scanner.nextLine();
+                        }else if (loginUsuario(conn, "empleados", scanner, sesion, opcion)) {
                             System.out.println("Inicio de sesión correcto. ¡Bienvenido " + obtenerNombreUsuario(conn, sesion, "empleados", opcion) + " al portal de empleados!");
                             System.out.println("Pulse ENTER para continuar...");
                             scanner.nextLine();
