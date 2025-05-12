@@ -48,6 +48,8 @@ public class Empleados {
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
             System.out.println("Empleado Añadido");
+            System.out.println("Pulse ENTER para continuar...");
+            scanner.nextLine();
         }catch(SQLException e){
             System.out.println("Error al insertar el empleado");
         }

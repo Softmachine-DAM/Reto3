@@ -46,7 +46,8 @@ public class Ejemplares {
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
             System.out.println("Ejemplar Añadido");
-            scanner.next();
+            System.out.println("Pulse ENTER para continuar...");
+            scanner.nextLine();
         }catch(SQLException e){
             System.out.println("Error al insertar ejemplares");
         }
