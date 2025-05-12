@@ -28,6 +28,8 @@ public class Menus {
                         Empleados.usoEmpleados();
                     } else {
                         System.out.println("No tienes permisos para modificar datos de los empleados");
+                        System.out.println("Pulse ENTER para continuar...");
+                        scanner.nextLine();
                     }
                     break;
                 case 4:
