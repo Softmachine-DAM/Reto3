@@ -13,7 +13,6 @@ public class Ejemplares {
             System.out.println("4. Ver Ejemplar"); 
             System.out.println("5. Volver");
             opcionUEJ = conexion.validarNumero();
-            scanner.nextLine();
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
         } while (opcionUEJ != 5);
     }
