@@ -59,7 +59,7 @@ public class Menus {
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
             switch (opcionMC){
                 case 1:
-                    
+                    Prestamos.PrestamosPendientes(sesion);
                     break;
                 case 2:
                     

@@ -4,14 +4,9 @@ import java.util.Scanner;
 public class conexion{
     public static void main(String[]args){
         Scanner scanner = new Scanner(System.in);
-        String url="jdbc:mysql://127.0.0.1:3306/biblioteca";
-        String user="Grupo3";
-        String password="Reto3";
         try{
-            //CONEXION A LA BASE DE DATOS
-            Connection conn = DriverManager.getConnection(url,user,password);
+            Connection conn = ConectarBD();
             System.out.println("Conexion exitosa a la base de datos");
-            //LOGIN
             int opcion = 0;
             int id = 0;
             String contraseña = "";
@@ -81,7 +76,7 @@ public class conexion{
                 }
                 System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
             } while (opcion != 3);
-        }catch(SQLException e){
+        }catch(Exception e){
             //e.printStackTrace();
             System.out.print("Error en la conexión ");
         }
@@ -130,5 +125,18 @@ public class conexion{
             numero = 0;
         }
         return numero;
+    }
+    public static Connection ConectarBD(){
+        String url="jdbc:mysql://127.0.0.1:3306/biblioteca";
+        String user="Grupo3";
+        String password="Reto3";
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url,user,password);
+            System.out.println("Conexion exitosa a la base de datos");
+        } catch (SQLException e) {
+            System.out.println("Error en la conexion");
+        }
+        return conn;
     }
 }

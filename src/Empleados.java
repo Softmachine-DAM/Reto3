@@ -31,12 +31,9 @@ public class Empleados {
         } while (opcionUEM != 5);
     }
     public static void insertEmpleados(){
-        String url="jdbc:mysql://127.0.0.1:3306/biblioteca";
-        String user="Grupo3";
-        String password="Reto3";
         Scanner scanner = new Scanner(System.in);
         try{
-            Connection conn = DriverManager.getConnection(url,user,password);
+            Connection conn = conexion.ConectarBD();
             System.out.println("Introduce el nombre del empleado");
             String nombre = scanner.nextLine();
             System.out.println("Introduce el rol del empleado");

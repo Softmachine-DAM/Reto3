@@ -24,12 +24,9 @@ public class Cliente{
         } while (opcionUC != 5);
     }
     public static void insertClientes(){
-        String url="jdbc:mysql://127.0.0.1:3306/biblioteca";
-        String user="Grupo3";
-        String password="Reto3";
         Scanner scanner = new Scanner(System.in);
         try{
-                Connection conn = DriverManager.getConnection(url,user,password);
+                Connection conn = conexion.ConectarBD();
                 System.out.println("Introduce el nombre del Cliente");
                 String nombre = scanner.nextLine();
                 System.out.println("Introduce los apellidos del Cliente");
