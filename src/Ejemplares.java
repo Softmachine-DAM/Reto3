@@ -14,6 +14,20 @@ public class Ejemplares {
             System.out.println("5. Volver");
             opcionUEJ = conexion.validarNumero();
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
+
+            switch(opcionUEJ){
+                case 1:
+                insertEjemplares();
+                break;
+                case 2:
+                break;
+                case 3:
+                break;
+                case 4:
+                break;
+                default:
+                break;
+            }
         } while (opcionUEJ != 5);
     }
     public static void insertEjemplares(){
@@ -25,15 +39,15 @@ public class Ejemplares {
             Connection conn = DriverManager.getConnection(url,user,password);
             System.out.println("Introduce el estado del ejemplar");
             String estado = scanner.nextLine();
-            scanner.next();
             System.out.println("Introduce el codigo del ejemplar");
             String cod_libro = scanner.nextLine();
-            scanner.next();
-            String str="INSERT INTO ejemplares";
-            str+="VALUES('"+estado+"',"+cod_libro+"')";
+            String str="INSERT INTO ejemplares(estado,cod_libro)";
+            str+="VALUES('"+estado+"','"+cod_libro+"')";
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
             System.out.println("Ejemplar Añadido");
+            System.out.println("Pulse ENTER para continuar...");
+            scanner.nextLine();
         }catch(SQLException e){
             System.out.println("Error al insertar ejemplares");
         }

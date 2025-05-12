@@ -26,6 +26,7 @@ public class Menus {
                 case 3:
                     if (sesion.getId() == 250) {
                         Empleados.usoEmpleados();
+                        
                     } else {
                         System.out.println("No tienes permisos para modificar datos de los empleados");
                         System.out.println("Pulse ENTER para continuar...");
@@ -51,9 +52,8 @@ public class Menus {
             System.out.println("*******************");
             System.out.println("Elige una opción:");
             System.out.println("1. Prestamos pendientes");
-            System.out.println("2. Libros disponibles");
-            System.out.println("3. Prestar libro");
-            System.out.println("4. Cerrar sesion");
+            System.out.println("2. Prestar libro");
+            System.out.println("3. Cerrar sesion");
             System.out.println(sesion.toString());
             opcionMC = conexion.validarNumero();
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
@@ -65,9 +65,6 @@ public class Menus {
                     
                     break;
                 case 3:
-                    
-                    break;
-                case 4:
                     sesion.setId(0);
                     sesion.setContraseña(null);
                     System.out.println("Se cerró la sesion correctamente");
@@ -76,7 +73,7 @@ public class Menus {
                     System.out.println("Opción no válida.");
                     break;
             }
-        } while (opcionMC != 4);
+        } while (opcionMC != 3);
     }
 }
 
