@@ -24,7 +24,11 @@ public class Menus {
                     Ejemplares.usoEjemplares();
                     break;
                 case 3:
-                    Empleados.usoEmpleados();
+                    if (sesion.getId() == 250) {
+                        Empleados.usoEmpleados();
+                    } else {
+                        System.out.println("No tienes permisos para modificar datos de los empleados");
+                    }
                     break;
                 case 4:
                     sesion.setId(0);
