@@ -1,3 +1,4 @@
+import java.sql.*;
 import java.util.Scanner;
 
 public class Empleados {
@@ -13,9 +14,42 @@ public class Empleados {
             System.out.println("5. Volver");
             opcionUEM = conexion.validarNumero();
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
+
+            switch (opcionUEM) {
+                case 1:
+                    insertEmpleados();
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                default:
+                    break;
+            }
         } while (opcionUEM != 5);
     }
     public static void insertEmpleados(){
-        
+        String url="jdbc:mysql://127.0.0.1:3306/biblioteca";
+        String user="Grupo3";
+        String password="Reto3";
+        Scanner scanner = new Scanner(System.in);
+        try{
+            Connection conn = DriverManager.getConnection(url,user,password);
+            System.out.println("Introduce el nombre del empleado");
+            String nombre = scanner.nextLine();
+            System.out.println("Introduce el rol del empleado");
+            String rol = scanner.nextLine();
+            System.out.println("Introduce tu contraseña");
+            String contraseña = scanner.nextLine();
+            String str="INSERT INTO empleados(nombre,rol,contraseña)";
+            str+="VALUES('"+nombre+"','"+rol+"','"+contraseña+"')";
+            Statement stmt=conn.createStatement();
+            stmt.executeUpdate(str);
+            System.out.println("Empleado Añadido");
+        }catch(SQLException e){
+            System.out.println("Error al insertar el empleado");
+        }
     }
 }

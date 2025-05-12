@@ -26,6 +26,7 @@ public class Menus {
                 case 3:
                     if (sesion.getId() == 250) {
                         Empleados.usoEmpleados();
+                        
                     } else {
                         System.out.println("No tienes permisos para modificar datos de los empleados");
                         System.out.println("Pulse ENTER para continuar...");
