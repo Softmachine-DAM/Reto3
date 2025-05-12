@@ -1,8 +1,4 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class Prestamos {
     public static void PrestamosPendientes(SesionActiva sesion){
@@ -36,7 +32,12 @@ public class Prestamos {
     }
     public static String ObtenerTituloLibro(int idLibro){
         String slctLibro = "SELECT titulo from Libros WHERE id_libro = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(slctLibro)) {
+        String url="jdbc:mysql://127.0.0.1:3306/biblioteca";
+        String user="Grupo3";
+        String password="Reto3";
+        try {
+            Connection conn = DriverManager.getConnection(url,user,password);
+            PreparedStatement stmt = conn.prepareStatement(slctLibro);
             stmt.setInt(1, idLibro);
             ResultSet rsLibro = stmt.executeQuery();
             if (rsLibro.next()) {
