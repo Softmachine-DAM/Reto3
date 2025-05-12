@@ -12,7 +12,6 @@ public class Empleados {
             System.out.println("4. Ver Empleados");
             System.out.println("5. Volver");
             opcionUEM = conexion.validarNumero();
-            scanner.nextLine();
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
         } while (opcionUEM != 5);
     }
