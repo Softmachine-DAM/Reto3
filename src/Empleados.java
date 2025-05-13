@@ -22,6 +22,7 @@ public class Empleados {
                 case 2:
                     break;
                 case 3:
+                eliminarEmpleados();
                     break;
                 case 4:
                     break;
@@ -68,12 +69,17 @@ public class Empleados {
     public static void eliminarEmpleados(){
         Scanner scanner = new Scanner(System.in);
         try{
+            System.out.println("Introduce el id del empleado que quieres eliminar");
+            String ID = scanner.nextLine();
             Connection conn = conexion.ConectarBD();
-            String str= "DELETE FROM empleados WHERE";
+            String str= "DELETE FROM empleados WHERE id_empleado = '" + ID +"'";
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
+            System.out.println("Empleado Eliminado");
+            System.out.println("Pulse ENTER para continuar...");
+            scanner.nextLine();
         }catch(SQLException e){
-
+            System.out.println("Error al eliminar al empleado");
         }
     }
 }

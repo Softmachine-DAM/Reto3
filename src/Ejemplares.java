@@ -69,9 +69,14 @@ public class Ejemplares {
         Connection conn = conexion.ConectarBD();
         Scanner scanner = new Scanner(System.in);
         try{
-            String str = "DELETE FROM ejemplares WHERE ";
+            System.out.println("Introduce el id del ejemplar que quieres eliminar");
+            String ID = scanner.nextLine();
+            String str = "DELETE FROM ejemplares WHERE cod_ejemplar ='" + ID + "'";
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
+            System.out.println("Ejemplar Eliminado");
+            System.out.println("Pulse ENTER para continuar...");
+            scanner.nextLine();
         }catch(SQLException e){
             System.out.println("Error al eliminar el ejemplar");
         }

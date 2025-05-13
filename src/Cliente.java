@@ -18,6 +18,9 @@ public class Cliente{
                 case 1:
                 insertClientes();
                 break;
+                case 3:
+                eliminarClientes();
+                break;
             }
         } while (opcionUC != 5);
     }
@@ -50,12 +53,17 @@ public class Cliente{
     public static void eliminarClientes(){
         Scanner scanner = new Scanner(System.in);
         try{
+            System.out.println("Introduce el id del usuario que quieres eliminar");
+            String ID = scanner.nextLine();
             Connection conn = conexion.ConectarBD();
-            String str = "DELETE FROM clientes_1 WHERE ";
+            String str = "DELETE FROM clientes_1 WHERE ID ='" + ID +"'";
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
+            System.out.println("Cliente Eliminado");
+            System.out.println("Pulse ENTER para continuar...");
+            scanner.nextLine();
         }catch(SQLException e){
-
+            System.out.println("Error al eliminar cliente");
         }
     }
 
