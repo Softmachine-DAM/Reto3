@@ -22,7 +22,7 @@ public class Ejemplares {
                 case 2:
                 break;
                 case 3:
-
+                eliminarEjemplares();
                 break;
                 case 4:
                 break;
@@ -50,13 +50,28 @@ public class Ejemplares {
             System.out.println("Error al insertar ejemplares");
         }
     }
+
+
+    public static void actualizarEjemplares(){
+        Scanner scanner = new Scanner(System.in);
+        try{
+            Connection conn = conexion.ConectarBD();
+            String str = "UPDATE ejemplares SET";
+            Statement stmt=conn.createStatement();
+            stmt.executeUpdate(str);
+        }catch(SQLException e){
+
+        }
+    }
+
+
     public static void eliminarEjemplares(){
-        String url="jdbc:mysql://127.0.0.1:3306/biblioteca";
-        String user="Grupo3";
-        String password="Reto3";
+        Connection conn = conexion.ConectarBD();
         Scanner scanner = new Scanner(System.in);
         try{
             String str = "DELETE FROM ejemplares WHERE ";
+            Statement stmt=conn.createStatement();
+            stmt.executeUpdate(str);
         }catch(SQLException e){
             System.out.println("Error al eliminar el ejemplar");
         }

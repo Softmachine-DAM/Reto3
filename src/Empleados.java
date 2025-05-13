@@ -51,4 +51,29 @@ public class Empleados {
             System.out.println("Error al insertar el empleado");
         }
     }
+
+
+        public static void actualizarEmpleados(){
+        Scanner scanner = new Scanner(System.in);
+        try{
+            Connection conn = conexion.ConectarBD();
+            String str = "UPDATE empleados SET";
+            Statement stmt=conn.createStatement();
+            stmt.executeUpdate(str);
+        }catch(SQLException e){
+
+        }
+    }
+
+    public static void eliminarEmpleados(){
+        Scanner scanner = new Scanner(System.in);
+        try{
+            Connection conn = conexion.ConectarBD();
+            String str= "DELETE FROM empleados WHERE";
+            Statement stmt=conn.createStatement();
+            stmt.executeUpdate(str);
+        }catch(SQLException e){
+
+        }
+    }
 }

@@ -46,4 +46,28 @@ public class Cliente{
                 System.out.println("Error al insertar cliente");
         }
     }
+
+    public static void eliminarClientes(){
+        Scanner scanner = new Scanner(System.in);
+        try{
+            Connection conn = conexion.ConectarBD();
+            String str = "DELETE FROM clientes_1 WHERE ";
+            Statement stmt=conn.createStatement();
+            stmt.executeUpdate(str);
+        }catch(SQLException e){
+
+        }
+    }
+
+    public static void actualizarClientes() {
+        Scanner scanner = new Scanner(System.in);
+        try{
+            Connection conn = conexion.ConectarBD();
+            String str = "UPDATE clientes_1 SET ";
+            Statement stmt=conn.createStatement();
+            stmt.executeUpdate(str);
+        }catch(SQLException e){
+
+        }
+    }
 }
