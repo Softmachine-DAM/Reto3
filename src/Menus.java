@@ -13,7 +13,6 @@ public class Menus {
             System.out.println("2. Ejemplares");
             System.out.println("3. Empleados");
             System.out.println("4. Cerrar sesion");
-            System.out.println(sesion.toString());
             opcionME = conexion.validarNumero();
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
             switch (opcionME){
@@ -54,7 +53,6 @@ public class Menus {
             System.out.println("1. Prestamos pendientes");
             System.out.println("2. Prestar libro");
             System.out.println("3. Cerrar sesion");
-            System.out.println(sesion.toString());
             opcionMC = conexion.validarNumero();
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
             switch (opcionMC){

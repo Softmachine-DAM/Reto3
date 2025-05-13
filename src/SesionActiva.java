@@ -7,6 +7,7 @@ public class SesionActiva {
         this.id = pId;
         this.contraseña = pContraseña;
     }
+    //Metodos
     public int getId() {
         return id;
     }

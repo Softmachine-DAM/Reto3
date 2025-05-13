@@ -14,8 +14,6 @@ public class Cliente{
             System.out.println("5.Volver");
             opcionUC = conexion.validarNumero();
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
-
-
             switch(opcionUC){
                 case 1:
                 insertClientes();

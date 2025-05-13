@@ -1,5 +1,4 @@
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,56 +13,92 @@ public class Prestamos {
             try (PreparedStatement stmt = conn.prepareStatement(slctPrest)){
                 stmt.setInt(1, sesion.getId());
                 ResultSet rsPrest = stmt.executeQuery();
-                if (rsPrest.next()) {
-                    System.out.println("Tienes pendiente de devolver el libro " + ObtenerTituloLibro(rsPrest.getInt("id_libro")));
-                    int opcionDevolver = 0;
-                    System.out.println("¿Quieres devolverlo?");
-                    System.out.println("1. Si");
-                    System.out.println("2. No");
-                    opcionDevolver = conexion.validarNumero();
-                    switch (opcionDevolver) {
-                        case 1:
-                            
-                            break;
-                        case 2:
-                            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
-                            System.out.println("Volviendo al portal de Clientes");
-                            System.out.println("Pulse ENTER para continuar...");
-                        scanner.nextLine();
-                            break;
-                        default:
-                            System.out.println("Introduzca una opcion valida");
-                            System.out.println("Pulse ENTER para continuar...");
-                            scanner.nextLine();
-                            break;
-                    }
-                }else{
+                if (!rsPrest.next()) {
                     System.out.println("No tienes ningun libro pendiente por devolver");
                     System.out.println("Pulse ENTER para continuar...");
                     scanner.nextLine();
+                }else{
+                    int[] ids = {0, 0, 0};
+                    int[] idsLibros = {0, 0, 0};
+                    int i = 0;
+                    ids[i] = rsPrest.getInt("id_prestamo");
+                    idsLibros[i] = rsPrest.getInt("id_libro");
+                    i++; 
+                    while (rsPrest.next()) {
+                        ids[i] = rsPrest.getInt("id_prestamo");
+                        idsLibros[i] = rsPrest.getInt("id_libro");
+                        i++; 
+                    }
+                    PrestamosPendientes prestamos = new PrestamosPendientes(ids[0], ids[1], ids[2],idsLibros[0],idsLibros[1],idsLibros[2]);
+                    int opcionDevolver = 0;
+                    int cont = 1;
+                    System.out.println("Tienes pendiente de devolver los siguientes libros:");
+                    System.out.println("Elige el que quieras devolver o selecciona la ultima opcion para salir");
+                    System.out.println(cont + ". " + ObtenerTituloLibro(prestamos.getId_libro1()));
+                    if (prestamos.getId2() != 0) {
+                        cont++;
+                        System.out.println(cont + ". " + ObtenerTituloLibro(prestamos.getId_libro2()));
+                        if (prestamos.getId3() != 0) {
+                            cont++;
+                            System.out.println(cont + ". " + ObtenerTituloLibro(prestamos.getId_libro3()));
+                        }
+                    }
+                    cont++;
+                    System.out.println(cont + ". Ninguno");
+                    opcionDevolver = conexion.validarNumero();
+                    if (opcionDevolver == 1){
+                        DevolverLibro(sesion, prestamos.getId1());
+                        System.out.println("Pulse ENTER para continuar...");
+                        scanner.nextLine();
+                    }else if (cont == 3 && opcionDevolver == 2){
+                        DevolverLibro(sesion, prestamos.getId2());
+                        System.out.println("Se ha devuelto el libro correctamente");
+                        System.out.println("Pulse ENTER para continuar...");
+                        scanner.nextLine();
+                    }else if (cont == 4 && opcionDevolver == 3){
+                        DevolverLibro(sesion, prestamos.getId3());
+                        System.out.println("Se ha devuelto el libro correctamente");
+                        System.out.println("Pulse ENTER para continuar...");
+                        scanner.nextLine();
+                    }else if (opcionDevolver == cont){
+                        System.out.println("No se devolvera ningun libro");
+                        System.out.println("Pulse ENTER para continuar...");
+                        scanner.nextLine();
+                    }
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
                 System.out.println("Error al consultar prestamos pendientes");
             }
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Error en la conexion");
         }
     }
     public static void PrestarLibro(SesionActiva sesion){
-
+        Scanner scanner = new Scanner(System.in);
+        try {
+            Connection conn = conexion.ConectarBD();
+            String slctPenal = "SELECT * FROM prestamos WHERE id_usuario = ? AND devuelto = 0";
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error en la conexion");
+        }
     }
     public static void VerLibros(SesionActiva sesion){
 
     }
-    public static void DevolverLibro(SesionActiva sesion){
+    public static void DevolverLibro(SesionActiva sesion, int id_prestamo){
         try {
             Connection conn = conexion.ConectarBD();
-            String updtPrestamo = "UPDATE INTO prestamos (devuelto) values (?)";
+            String updtPrestamo = "UPDATE prestamos set devuelto = ?, fecha_fin = NOW() where id_prestamo = ?";
             try (PreparedStatement stmt = conn.prepareStatement(updtPrestamo)) {
                 stmt.setInt(1, 1);
-                ResultSet rsLibro = stmt.executeQuery();
-                if (rsLibro.next()) {
+                stmt.setInt(2, id_prestamo);
+                int rsLibro = stmt.executeUpdate();
+                if (rsLibro == 1) {
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
                     System.out.println("Se ha devuelto el libro");
                 }
             }catch(SQLException e){
