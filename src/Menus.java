@@ -10,7 +10,7 @@ public class Menus {
             System.out.println("******************");
             System.out.println("Elige una opción:");
             System.out.println("1. Clientes");
-            System.out.println("2. Ejemplares");
+            System.out.println("2. Libros");
             System.out.println("3. Empleados");
             System.out.println("4. Cerrar sesion");
             opcionME = conexion.validarNumero();
@@ -20,7 +20,7 @@ public class Menus {
                     Cliente.usoClientes();
                     break;
                 case 2:
-                    Ejemplares.usoEjemplares();
+                    Libros.usoLibros();
                     break;
                 case 3:
                     if (sesion.getId() == 250) {
