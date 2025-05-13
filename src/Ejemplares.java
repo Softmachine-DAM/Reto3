@@ -22,7 +22,7 @@ public class Ejemplares {
                 case 2:
                 break;
                 case 3:
-                eliminarEjemplares();
+                // eliminarEjemplares();
                 break;
                 case 4:
                 break;
@@ -65,20 +65,20 @@ public class Ejemplares {
     }
 
 
-    public static void eliminarEjemplares(){
-        Connection conn = conexion.ConectarBD();
-        Scanner scanner = new Scanner(System.in);
-        try{
-            System.out.println("Introduce el id del ejemplar que quieres eliminar");
-            String ID = scanner.nextLine();
-            String str = "DELETE FROM ejemplares WHERE cod_ejemplar ='" + ID + "'";
-            Statement stmt=conn.createStatement();
-            stmt.executeUpdate(str);
-            System.out.println("Ejemplar Eliminado");
-            System.out.println("Pulse ENTER para continuar...");
-            scanner.nextLine();
-        }catch(SQLException e){
-            System.out.println("Error al eliminar el ejemplar");
-        }
-    }
+    // public static void eliminarEjemplares(){
+    //     Connection conn = conexion.ConectarBD();
+    //     Scanner scanner = new Scanner(System.in);
+    //     try{
+    //         System.out.println("Introduce el id del ejemplar que quieres eliminar");
+    //         String ID = scanner.nextLine();
+    //         String str = "DELETE FROM ejemplares WHERE cod_ejemplar ='" + ID + "'";
+    //         Statement stmt=conn.createStatement();
+    //         stmt.executeUpdate(str);
+    //         System.out.println("Ejemplar Eliminado");
+    //         System.out.println("Pulse ENTER para continuar...");
+    //         scanner.nextLine();
+    //     }catch(SQLException e){
+    //         System.out.println("Error al eliminar el ejemplar");
+    //     }
+    // }
 }

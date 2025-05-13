@@ -129,7 +129,7 @@ public class conexion{
         return numero;
     }
     public static Connection ConectarBD(){
-        String url="jdbc:mysql://127.0.0.1:3306/biblioteca2";
+        String url="jdbc:mysql://127.0.0.1:3306/biblioteca3";
         String user="123";
         String password="123";
         Connection conn = null;

@@ -20,6 +20,7 @@ public class Empleados {
                     insertEmpleados();
                     break;
                 case 2:
+                actualizarEmpleados();
                     break;
                 case 3:
                 eliminarEmpleados();
@@ -57,12 +58,26 @@ public class Empleados {
         public static void actualizarEmpleados(){
         Scanner scanner = new Scanner(System.in);
         try{
+            System.out.println("Introduce el ID del Empleado");
+                String ID = scanner.nextLine();
+            System.out.println("Introduce el nombre del Empleado");
+                String nombre = scanner.nextLine();
+                System.out.println("Introduce el rol del empleado");
+                String rol = scanner.nextLine();
+                System.out.println("Introduce la contraseña");
+                String contraseña = scanner.nextLine();
             Connection conn = conexion.ConectarBD();
-            String str = "UPDATE empleados SET";
+            String str = "UPDATE empleados SET nombre = '"+nombre+"', rol='"+rol+"' ,Contraseña='"+contraseña+"' WHERE id_empleado = '"+ ID +"'";
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
+            System.out.println("Empleado Actualizado");
+            System.out.println("Pulse ENTER para continuar...");
+            scanner.nextLine();
         }catch(SQLException e){
-
+            System.out.println("Error al actualizar datos del empleado");
+            System.out.println("Pulse ENTER para continuar...");
+            scanner.nextLine();
+      
         }
     }
 

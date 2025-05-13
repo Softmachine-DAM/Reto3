@@ -18,6 +18,9 @@ public class Cliente{
                 case 1:
                 insertClientes();
                 break;
+                case 2:
+                actualizarClientes();
+                break;
                 case 3:
                 eliminarClientes();
                 break;
@@ -70,12 +73,29 @@ public class Cliente{
     public static void actualizarClientes() {
         Scanner scanner = new Scanner(System.in);
         try{
+            System.out.println("Introduce el ID del Cliente");
+                String ID = scanner.nextLine();
+            System.out.println("Introduce el nombre del Cliente");
+                String nombre = scanner.nextLine();
+                System.out.println("Introduce los apellidos del Cliente");
+                String apellidos = scanner.nextLine();
+                System.out.println("Introduce el correo del Cliente");
+                String correo = scanner.nextLine();
+                System.out.println("Introduce el telefono del Cliente");
+                String telefono = scanner.nextLine();
+                System.out.println("Introduce la contraseña");
+                String contraseña = scanner.nextLine();
             Connection conn = conexion.ConectarBD();
-            String str = "UPDATE clientes_1 SET ";
+            String str = "UPDATE clientes_1 SET Nombre = '"+nombre+"', Apellidos='"+apellidos+"' ,Correo='"+correo+"',Telefono='"+telefono+"',Contraseña='"+contraseña+"' WHERE ID = '"+ ID +"'";
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
+            System.out.println("Cliente Actualizado");
+            System.out.println("Pulse ENTER para continuar...");
+            scanner.nextLine();
         }catch(SQLException e){
-
+            System.out.println("Error al actualizar datos del cliente");
+            System.out.println("Pulse ENTER para continuar...");
+            scanner.nextLine();
         }
     }
 }
