@@ -145,13 +145,27 @@ public class Prestamos {
             System.out.println("Error en la conexion");
         }
     }
-    public static void DevolverLibro(SesionActiva sesion, int id_prestamo){
+    public static void DevolverLibro(SesionActiva sesion, int id_prestamo) {
         try {
             Connection conn = conexion.ConectarBD();
-            String updtPrestamo = "UPDATE prestamos set devuelto = ?, fecha_fin = NOW() where id_prestamo = ?";
+            int id_libro = -1;
+            String getLibro = "SELECT id_libro FROM prestamos WHERE id_prestamo = ?";
+            try (PreparedStatement getStmt = conn.prepareStatement(getLibro)) {
+                getStmt.setInt(1, id_prestamo);
+                ResultSet rs = getStmt.executeQuery();
+                if (rs.next()) {
+                    id_libro = rs.getInt("id_libro");
+                } else {
+                    System.out.println("No se encontró el préstamo con ese ID.");
+                    return;
+                }
+                rs.close();
+            }
+            String updtPrestamo = "UPDATE prestamos SET devuelto = ?, fecha_fin = NOW() WHERE id_prestamo = ?";
             try (PreparedStatement stmt = conn.prepareStatement(updtPrestamo)) {
                 stmt.setInt(1, 1);
                 stmt.setInt(2, id_prestamo);
+    
                 int rsPrestamo = stmt.executeUpdate();
                 if (rsPrestamo == 1) {
                     String updtLibro = "UPDATE libros SET Ejemplares = Ejemplares + 1 WHERE id_libro = ?";
@@ -176,6 +190,7 @@ public class Prestamos {
             e.printStackTrace();
         }
     }
+    
     
     public static String ObtenerTituloLibro(int idLibro){
         try {
