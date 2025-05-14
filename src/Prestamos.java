@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import com.mysql.cj.protocol.a.SqlDateValueEncoder;
+
 public class Prestamos {
     public static void PrestamosPendientes(SesionActiva sesion){
         Scanner scanner = new Scanner(System.in);
@@ -79,15 +81,75 @@ public class Prestamos {
         Scanner scanner = new Scanner(System.in);
         try {
             Connection conn = conexion.ConectarBD();
-            String slctPenal = "SELECT * FROM prestamos WHERE id_usuario = ? AND devuelto = 0";
-            
+            if (EstaPenalizado(sesion) == false && PrestamosMaximos(sesion) == false) {
+                
+            }else if (EstaPenalizado(sesion)) {
+                System.out.println("Estas penalizado, no puedes realizar ningun prestamo");
+                System.out.println("Pulse ENTER para continuar...");
+                scanner.nextLine();
+            }else if (PrestamosMaximos(sesion)) {
+                System.out.println("Ya tienes prestados tres libros, devuelve alguno para poder prestar otro");
+                System.out.println("Pulse ENTER para continuar...");
+                scanner.nextLine();
+            }
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error en la conexion");
         }
     }
+    public static boolean EstaPenalizado(SesionActiva sesion){
+        try {
+            Connection conn = conexion.ConectarBD();
+            String selectPenalizado = "SELECT * FROM clientes_1 WHERE id_usuario = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(selectPenalizado)){
+                stmt.setInt(1, sesion.getId());
+                ResultSet rsPenal = stmt.executeQuery();
+                if (rsPenal.next()) {
+                    if (rsPenal.getInt("Penalizado") == 1) {
+                    return true;
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("Error al comprobar la penalizacion");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error en la conexion");
+        }
+        return false;
+    }
+    public static boolean PrestamosMaximos(SesionActiva sesion){
+        try {
+            Connection conn = conexion.ConectarBD();
+            String selectPenalizado = "SELECT COUNT(*) AS total_prestamos FROM prestamos WHERE id_usuario = ? AND devuelto = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(selectPenalizado)){
+                stmt.setInt(1, sesion.getId());
+                stmt.setInt(2, 0);
+                ResultSet rsPenal = stmt.executeQuery();
+                if (rsPenal.next()) {
+                    if (rsPenal.getInt("total_prestamos")>2){
+                        return true;
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("Error al comprobar el numero de prestamos");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error en la conexion");
+        }
+        return false;
+    }
     public static void VerLibros(SesionActiva sesion){
-
+        try {
+            Connection conn = conexion.ConectarBD();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error en la conexion");
+        }
     }
     public static void DevolverLibro(SesionActiva sesion, int id_prestamo){
         try {
