@@ -67,6 +67,8 @@ public class conexion{
                             break;
                         case 3:
                             System.out.println("Gracias por utilizar el programa");
+                            System.out.println("Pulse ENTER para cerrar");
+                                scanner.nextLine();
                             System.exit(0);
                             break;
                         default:
