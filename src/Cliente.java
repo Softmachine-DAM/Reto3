@@ -25,6 +25,7 @@ public class Cliente{
                     eliminarClientes();
                     break;
                 case 4:
+                verClientes();
                     break;
                 default:
                     System.out.println("Introduzca una opcion valida");

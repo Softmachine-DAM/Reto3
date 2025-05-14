@@ -2,7 +2,7 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>console</headerType>
-  <jar>C:\Users\marke\Desktop\Reto 3\reto3\MiBiblioteca.jar</jar>
+  <jar>C:\Users\marke\Desktop\Reto 3\reto3\Biblioteca.jar</jar>
   <outfile>C:\Users\marke\Desktop\Reto 3\reto3\lib\Biblioteca.exe</outfile>
   <errTitle>Biblioteca Error</errTitle>
   <cmdLine></cmdLine>
