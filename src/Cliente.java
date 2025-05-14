@@ -11,7 +11,7 @@ public class Cliente{
             System.out.println("2. Actualizar Cliente");
             System.out.println("3. Eliminar Cliente");
             System.out.println("4. Ver Clientes");
-            System.out.println("5.Volver");
+            System.out.println("0.Volver");
             opcionUC = conexion.validarNumero();
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
             switch(opcionUC){
@@ -27,7 +27,7 @@ public class Cliente{
                 case 4:
                 verClientes();
                     break;
-                case 5:
+                case 0:
                     break;
                 default:
                     System.out.println("Introduzca una opcion valida");
@@ -35,7 +35,7 @@ public class Cliente{
                     scanner.nextLine();
                     break;
             }
-        } while (opcionUC != 5);
+        } while (opcionUC != 0);
     }
     public static void insertClientes(){
         Scanner scanner = new Scanner(System.in);

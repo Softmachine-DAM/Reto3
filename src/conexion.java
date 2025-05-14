@@ -17,7 +17,7 @@ public class conexion{
                     System.out.println("Elige tu tipo de Usuario:");
                     System.out.println("1. Clientes");
                     System.out.println("2. Empleados");
-                    System.out.println("3. Salir");
+                    System.out.println("0. Salir");
                     opcion = validarNumero();
                     System.out.println("\n\n\n\n\n\n\n\n\n\n");
                     if (opcion == 1 || opcion == 2) {
@@ -65,7 +65,7 @@ public class conexion{
                                 scanner.nextLine();
                             }
                             break;
-                        case 3:
+                        case 0:
                             System.out.println("Gracias por utilizar el programa");
                             System.out.println("Pulse ENTER para cerrar");
                                 scanner.nextLine();

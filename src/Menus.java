@@ -52,7 +52,7 @@ public class Menus {
             System.out.println("Elige una opción:");
             System.out.println("1. Prestamos pendientes");
             System.out.println("2. Prestar libro");
-            System.out.println("3. Cerrar sesion");
+            System.out.println("0. Cerrar sesion");
             opcionMC = conexion.validarNumero();
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
             switch (opcionMC){
@@ -62,7 +62,7 @@ public class Menus {
                 case 2:
                     Prestamos.PrestarLibro(sesion);
                     break;
-                case 3:
+                case 0:
                     sesion.setId(0);
                     sesion.setContraseña(null);
                     System.out.println("Se cerró la sesion correctamente");
@@ -71,7 +71,7 @@ public class Menus {
                     System.out.println("Opción no válida.");
                     break;
             }
-        } while (opcionMC != 3);
+        } while (opcionMC != 0);
     }
 }
 

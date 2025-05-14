@@ -11,7 +11,7 @@ public class Libros {
             System.out.println("2. Actualizar Libro");
             System.out.println("3. Eliminar Libro");
             System.out.println("4. Ver Libros"); 
-            System.out.println("5. Volver");
+            System.out.println("0. Volver");
             opcionUEJ = conexion.validarNumero();
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
 
@@ -28,7 +28,7 @@ public class Libros {
                 case 4:
                     VerLibros();
                     break;
-                case 5:
+                case 0:
                     break;
                 default:
                     System.out.println("Introduzca una opcion valida");
@@ -36,7 +36,7 @@ public class Libros {
                     scanner.nextLine();
                     break;
             }
-        } while (opcionUEJ != 5);
+        } while (opcionUEJ != 0);
     }
     public static void insertLibros(){
         Scanner scanner = new Scanner(System.in);

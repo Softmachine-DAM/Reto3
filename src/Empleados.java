@@ -11,7 +11,7 @@ public class Empleados {
             System.out.println("2. Actualizar Empleado");
             System.out.println("3. Eliminar Empleado");
             System.out.println("4. Ver Empleados");
-            System.out.println("5. Volver");
+            System.out.println("0. Volver");
             opcionUEM = conexion.validarNumero();
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
 
@@ -28,7 +28,7 @@ public class Empleados {
                 case 4:
                     verEmpleados();
                     break;
-                case 5:
+                case 0:
                     break;
                 default:
                     System.out.println("Introduzca una opcion valida");
@@ -36,7 +36,7 @@ public class Empleados {
                     scanner.nextLine();
                     break;
             }
-        } while (opcionUEM != 5);
+        } while (opcionUEM != 0);
     }
     public static void insertEmpleados(){
         Scanner scanner = new Scanner(System.in);
