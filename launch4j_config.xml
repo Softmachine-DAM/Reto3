@@ -13,7 +13,7 @@
   <stayAlive>false</stayAlive>
   <restartOnCrash>true</restartOnCrash>
   <manifest></manifest>
-  <icon></icon>
+  <icon>C:\Users\marke\Downloads\Captura de pantalla 2024-10-02 094135.ico</icon>
   <classPath>
     <mainClass>conexion</mainClass>
     <cp>mysql-connector-j-9.3.0.jar</cp>
