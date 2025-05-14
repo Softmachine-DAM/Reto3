@@ -129,9 +129,9 @@ public class conexion{
         return numero;
     }
     public static Connection ConectarBD(){
-        String url="jdbc:mysql://127.0.0.1:3306/biblioteca3";
-        String user="123";
-        String password="123";
+        String url="jdbc:mysql://127.0.0.1:3306/biblioteca";
+        String user="Grupo3";
+        String password="Reto3";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url,user,password);

@@ -89,27 +89,52 @@ public class Prestamos {
     public static void VerLibros(SesionActiva sesion){
 
     }
-    public static void DevolverLibro(SesionActiva sesion, int id_prestamo){
+    public static void DevolverLibro(SesionActiva sesion, int id_prestamo) {
         try {
             Connection conn = conexion.ConectarBD();
-            String updtPrestamo = "UPDATE prestamos set devuelto = ?, fecha_fin = NOW() where id_prestamo = ?";
+            int id_libro = -1;
+            String getLibro = "SELECT id_libro FROM prestamos WHERE id_prestamo = ?";
+            try (PreparedStatement getStmt = conn.prepareStatement(getLibro)) {
+                getStmt.setInt(1, id_prestamo);
+                ResultSet rs = getStmt.executeQuery();
+                if (rs.next()) {
+                    id_libro = rs.getInt("id_libro");
+                } else {
+                    System.out.println("No se encontró el préstamo con ese ID.");
+                    return;
+                }
+                rs.close();
+            }
+            String updtPrestamo = "UPDATE prestamos SET devuelto = ?, fecha_fin = NOW() WHERE id_prestamo = ?";
             try (PreparedStatement stmt = conn.prepareStatement(updtPrestamo)) {
                 stmt.setInt(1, 1);
                 stmt.setInt(2, id_prestamo);
-                int rsLibro = stmt.executeUpdate();
-                if (rsLibro == 1) {
-                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
-                    System.out.println("Se ha devuelto el libro");
+    
+                int rsPrestamo = stmt.executeUpdate();
+                if (rsPrestamo == 1) {
+                    String updtLibro = "UPDATE libros SET Ejemplares = Ejemplares + 1 WHERE id_libro = ?";
+                    try (PreparedStatement stmt1 = conn.prepareStatement(updtLibro)) {
+                        stmt1.setInt(1, id_libro);
+                        stmt1.executeUpdate();
+                        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
+                        System.out.println("Se ha devuelto el libro");
+                    } catch (SQLException exception) {
+                        System.out.println("Error al añadir el ejemplar");
+                        exception.printStackTrace();
+                    }
+                } else {
+                    System.out.println("Error: No se actualizó el préstamo.");
                 }
-            }catch(SQLException e){
-                e.printStackTrace();
+            } catch (SQLException e) {
                 System.out.println("Error al devolver el libro");
+                e.printStackTrace();
             }
         } catch (Exception e) {
+            System.out.println("Error en la conexión");
             e.printStackTrace();
-            System.out.println("Error en la conexion");
         }
     }
+    
     public static String ObtenerTituloLibro(int idLibro){
         try {
             Connection conn = conexion.ConectarBD();
