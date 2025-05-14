@@ -26,7 +26,9 @@ public class Empleados {
                     eliminarEmpleados();
                     break;
                 case 4:
-                verEmpleados();
+                    verEmpleados();
+                    break;
+                case 5:
                     break;
                 default:
                     System.out.println("Introduzca una opcion valida");

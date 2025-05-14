@@ -26,6 +26,8 @@ public class Cliente{
                     break;
                 case 4:
                     break;
+                case 5:
+                    break;
                 default:
                     System.out.println("Introduzca una opcion valida");
                     System.out.println("Pulse ENTER para continuar...");

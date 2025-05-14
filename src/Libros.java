@@ -28,6 +28,8 @@ public class Libros {
                 case 4:
                     VerLibros();
                     break;
+                case 5:
+                    break;
                 default:
                     System.out.println("Introduzca una opcion valida");
                     System.out.println("Pulse ENTER para continuar...");
