@@ -43,6 +43,7 @@ public class Prestamos {
                     cont++;
                     System.out.println(cont + ". Ninguno");
                     opcionDevolver = conexion.validarNumero();
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
                     if (opcionDevolver == 1){
                         DevolverLibro(sesion, prestamos.getId1());
                         System.out.println("Pulse ENTER para continuar...");
@@ -74,24 +75,50 @@ public class Prestamos {
     }
     public static void PrestarLibro(SesionActiva sesion){
         Scanner scanner = new Scanner(System.in);
-        try {
-            Connection conn = conexion.ConectarBD();
-            if (EstaPenalizado(sesion) == false && PrestamosMaximos(sesion) == false) {
-                System.out.println("Puedes hacer prestamos");
-                System.out.println("Pulse ENTER para continuar...");
-                scanner.nextLine();
-            }else if (EstaPenalizado(sesion) == true) {
-                System.out.println("Estas penalizado, no puedes realizar ningun prestamo");
-                System.out.println("Pulse ENTER para continuar...");
-                scanner.nextLine();
-            }else if (PrestamosMaximos(sesion) == true) {
-                System.out.println("Ya tienes prestados tres libros, devuelve alguno para poder prestar otro");
-                System.out.println("Pulse ENTER para continuar...");
-                scanner.nextLine();
+        if (EstaPenalizado(sesion) == false && PrestamosMaximos(sesion) == false) {
+            VerLibrosDisponibles(sesion);
+            System.out.println("\n\nIntroduce el id del libro que quieres coger prestado:");
+            int idLibro = conexion.validarNumero();
+            String selectLibro = "SELECT * from Libros where id_libro = ?";
+            try (Connection conn = conexion.ConectarBD();
+            PreparedStatement stmt = conn.prepareStatement(selectLibro)){
+                stmt.setInt(1, idLibro);
+                try (ResultSet rsLibro = stmt.executeQuery();){
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
+                    if (rsLibro.next()) {
+                        String insertPrest = "INSERT INTO Prestamos (id_usuario,id_libro,fecha_fin) values (?, ?, NOW() + INTERVAL 14 DAY)";
+                        String updateLibros = "UPDATE Libros SET Ejemplares = Ejemplares -1 WHERE id_libro = ?";
+                        PreparedStatement stmtPrest = conn.prepareStatement(insertPrest);
+                        stmtPrest.setInt(1, sesion.getId());
+                        stmtPrest.setInt(2, idLibro);
+                        PreparedStatement stmtLibro = conn.prepareStatement(updateLibros);
+                        stmtLibro.setInt(1, idLibro);
+                        stmtPrest.executeUpdate();
+                        stmtLibro.executeUpdate();
+                        System.out.println("Se ha realizado el prestamo");
+                        System.out.println("Pulse ENTER para continuar...");
+                        scanner.nextLine();
+                    }else{
+                        System.out.println("No tenemos ningun libro con ese id, se te devolvera al menu");
+                        System.out.println("Pulse ENTER para continuar...");
+                        scanner.nextLine();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    System.out.println("Error al prestar el libro");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("Error en la conexion");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error en la conexion");
+        }else if (EstaPenalizado(sesion) == true) {
+            System.out.println("Estas penalizado, no puedes realizar ningun prestamo");
+            System.out.println("Pulse ENTER para continuar...");
+            scanner.nextLine();
+        }else if (PrestamosMaximos(sesion) == true) {
+            System.out.println("Ya tienes prestados tres libros, devuelve alguno para poder prestar otro");
+            System.out.println("Pulse ENTER para continuar...");
+            scanner.nextLine();
         }
     }
     public static boolean EstaPenalizado(SesionActiva sesion){
@@ -133,11 +160,11 @@ public class Prestamos {
         }
         return false;
     }
-    public static void VerLibros(SesionActiva sesion){
+    public static void VerLibrosDisponibles(SesionActiva sesion){
         try {
             Connection conn = conexion.ConectarBD();
             Statement statement = conn.createStatement();
-            String str= "SELECT * FROM libros";
+            String str= "SELECT * FROM libros WHERE Ejemplares>0";
             ResultSet rs = statement.executeQuery(str);
             while (rs.next()) {
                 int idLibro = rs.getInt("id_libro");
@@ -145,11 +172,10 @@ public class Prestamos {
                 int anio = rs.getInt("anio_publicacion");
                 String genero = rs.getString("genero");
                 int idEditorial = rs.getInt("id_editorial");
-                int idCategoria = rs.getInt("id_categoria");
                 int ejemplares = rs.getInt("Ejemplares");
                 System.out.println("ID: " + idLibro + " | Título: " + titulo + 
                 " | Año: " + anio + " | Género: " + genero +
-                " | Editorial: " + idEditorial + " | Categoría: " + idCategoria +
+                " | Editorial: " + idEditorial +
                 " | Ejemplares: " + ejemplares);
         } 
         }catch (Exception e) {
@@ -173,7 +199,7 @@ public class Prestamos {
                 }
                 rs.close();
             }
-            String updtPrestamo = "UPDATE prestamos SET devuelto = ?, fecha_fin = NOW() WHERE id_prestamo = ?";
+            String updtPrestamo = "UPDATE prestamos SET devuelto = ?, fecha_devolucion = NOW() WHERE id_prestamo = ?";
             try (PreparedStatement stmt = conn.prepareStatement(updtPrestamo)) {
                 stmt.setInt(1, 1);
                 stmt.setInt(2, id_prestamo);
@@ -202,8 +228,6 @@ public class Prestamos {
             e.printStackTrace();
         }
     }
-    
-    
     public static String ObtenerTituloLibro(int idLibro){
         try {
             Connection conn = conexion.ConectarBD();

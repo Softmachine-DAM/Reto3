@@ -20,14 +20,17 @@ public class Empleados {
                     insertEmpleados();
                     break;
                 case 2:
-                actualizarEmpleados();
+                    actualizarEmpleados();
                     break;
                 case 3:
-                eliminarEmpleados();
+                    eliminarEmpleados();
                     break;
                 case 4:
                     break;
                 default:
+                    System.out.println("Introduzca una opcion valida");
+                    System.out.println("Pulse ENTER para continuar...");
+                    scanner.nextLine();
                     break;
             }
         } while (opcionUEM != 5);
