@@ -1,5 +1,5 @@
-import java.util.Scanner;
 import java.sql.*;
+import java.util.Scanner;
 
 public class Cliente{
     public static void usoClientes(){
@@ -105,6 +105,28 @@ public class Cliente{
             System.out.println("Error al actualizar datos del cliente");
             System.out.println("Pulse ENTER para continuar...");
             scanner.nextLine();
+        }
+    }
+       public static void verClientes(){
+        try {
+            Connection conn = conexion.ConectarBD();
+            Statement statement = conn.createStatement();
+            String str= "SELECT * FROM clientes_1";
+            ResultSet rs = statement.executeQuery(str);
+            while (rs.next()) {
+                String Nombre = rs.getString("Nombre");
+                String Apellidos = rs.getString("Apellidos");
+                String Correo = rs.getString("Correo");
+                int  Telefono = rs.getInt("telefono");
+                String Contraseña = rs.getString("Contraseña");
+                int ID = rs.getInt("ID");
+                int Penalizado = rs.getInt("penalizado");
+                System.out.println("Nombre: " + Nombre + " | Apellidos: " + Apellidos + 
+                " | Correo: " + Correo + " | Telefono: " + Telefono + " | Contraseña: " + Contraseña + " | ID:" + ID + " |Penalizado:" + Penalizado);
+        } 
+        }catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error en la conexion");
         }
     }
 }
