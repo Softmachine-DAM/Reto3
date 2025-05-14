@@ -26,6 +26,7 @@ public class Empleados {
                 eliminarEmpleados();
                     break;
                 case 4:
+                verEmpleados();
                     break;
                 default:
                     break;
@@ -105,12 +106,11 @@ public class Empleados {
             String str= "SELECT * FROM empleados";
             ResultSet rs = statement.executeQuery(str);
             while (rs.next()) {
-                int idempleado = rs.getInt("id_libro");
-                String nombre = rs.getString("titulo");
-                String rol = rs.getString("anio_publicacion");
-                String contraseña = rs.getString("genero");
+                int idempleado = rs.getInt("id_empleado");
+                String nombre = rs.getString("nombre");
+                String rol = rs.getString("rol");
                 System.out.println("ID: " + idempleado + " | Nombre: " + nombre + 
-                " | Rol: " + rol + " | Contraseña: " + contraseña);
+                " | Rol: " + rol + " ");
         } 
         }catch (Exception e) {
             e.printStackTrace();
