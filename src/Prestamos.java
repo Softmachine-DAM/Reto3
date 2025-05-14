@@ -83,11 +83,11 @@ public class Prestamos {
                 System.out.println("Puedes hacer prestamos");
                 System.out.println("Pulse ENTER para continuar...");
                 scanner.nextLine();
-            }else if (EstaPenalizado(sesion)) {
+            }else if (EstaPenalizado(sesion) == true) {
                 System.out.println("Estas penalizado, no puedes realizar ningun prestamo");
                 System.out.println("Pulse ENTER para continuar...");
                 scanner.nextLine();
-            }else if (PrestamosMaximos(sesion)) {
+            }else if (PrestamosMaximos(sesion) == true) {
                 System.out.println("Ya tienes prestados tres libros, devuelve alguno para poder prestar otro");
                 System.out.println("Pulse ENTER para continuar...");
                 scanner.nextLine();
@@ -98,47 +98,41 @@ public class Prestamos {
         }
     }
     public static boolean EstaPenalizado(SesionActiva sesion){
-        try {
-            Connection conn = conexion.ConectarBD();
-            String selectPenalizado = "SELECT * FROM clientes_1 WHERE id_usuario = ?";
-            try (PreparedStatement stmt = conn.prepareStatement(selectPenalizado)){
-                stmt.setInt(1, sesion.getId());
-                ResultSet rsPenal = stmt.executeQuery();
+        String selectPenalizado = "SELECT Penalizado FROM clientes_1 WHERE ID = ?";
+        try (Connection conn = conexion.ConectarBD();
+        PreparedStatement stmt = conn.prepareStatement(selectPenalizado)){
+            stmt.setInt(1, sesion.getId());
+            try (ResultSet rsPenal = stmt.executeQuery();){
                 if (rsPenal.next()) {
                     if (rsPenal.getInt("Penalizado") == 1) {
-                    return true;
-                    }
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println("Error al comprobar la penalizacion");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error en la conexion");
-        }
-        return false;
-    }
-    public static boolean PrestamosMaximos(SesionActiva sesion){
-        try {
-            Connection conn = conexion.ConectarBD();
-            String selectPenalizado = "SELECT COUNT(*) AS total_prestamos FROM prestamos WHERE id_usuario = ? AND devuelto = ?";
-            try (PreparedStatement stmt = conn.prepareStatement(selectPenalizado)){
-                stmt.setInt(1, sesion.getId());
-                stmt.setInt(2, 0);
-                ResultSet rsPenal = stmt.executeQuery();
-                if (rsPenal.next()) {
-                    if (rsPenal.getInt("total_prestamos")>2){
                         return true;
                     }
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
-                System.out.println("Error al comprobar el numero de prestamos");
+                System.out.println("Error en la consulta");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Error en la conexion");
+            System.out.println("Error al comprobar la penalizacion");
+        }
+        return false;
+    }
+    public static boolean PrestamosMaximos(SesionActiva sesion){
+        String selectPenalizado = "SELECT COUNT(*) AS total_prestamos FROM prestamos WHERE id_usuario = ? AND devuelto = ?";
+        try (Connection conn = conexion.ConectarBD();
+        PreparedStatement stmt = conn.prepareStatement(selectPenalizado)){
+            stmt.setInt(1, sesion.getId());
+            stmt.setInt(2, 0);
+            ResultSet rsPenal = stmt.executeQuery();
+            if (rsPenal.next()) {
+                if (rsPenal.getInt("total_prestamos")>2){
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error al comprobar el numero de prestamos");
         }
         return false;
     }

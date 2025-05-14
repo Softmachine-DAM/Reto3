@@ -60,7 +60,7 @@ public class Menus {
                     Prestamos.PrestamosPendientes(sesion);
                     break;
                 case 2:
-                    
+                    Prestamos.PrestarLibro(sesion);
                     break;
                 case 3:
                     sesion.setId(0);
