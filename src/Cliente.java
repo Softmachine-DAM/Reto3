@@ -16,14 +16,21 @@ public class Cliente{
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
             switch(opcionUC){
                 case 1:
-                insertClientes();
-                break;
+                    insertClientes();
+                    break;
                 case 2:
-                actualizarClientes();
-                break;
+                    actualizarClientes();
+                    break;
                 case 3:
-                eliminarClientes();
-                break;
+                    eliminarClientes();
+                    break;
+                case 4:
+                    break;
+                default:
+                    System.out.println("Introduzca una opcion valida");
+                    System.out.println("Pulse ENTER para continuar...");
+                    scanner.nextLine();
+                    break;
             }
         } while (opcionUC != 5);
     }
