@@ -82,7 +82,9 @@ public class Prestamos {
         try {
             Connection conn = conexion.ConectarBD();
             if (EstaPenalizado(sesion) == false && PrestamosMaximos(sesion) == false) {
-                
+                System.out.println("Puedes hacer prestamos");
+                System.out.println("Pulse ENTER para continuar...");
+                scanner.nextLine();
             }else if (EstaPenalizado(sesion)) {
                 System.out.println("Estas penalizado, no puedes realizar ningun prestamo");
                 System.out.println("Pulse ENTER para continuar...");
@@ -145,7 +147,7 @@ public class Prestamos {
     public static void VerLibros(SesionActiva sesion){
         try {
             Connection conn = conexion.ConectarBD();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error en la conexion");
