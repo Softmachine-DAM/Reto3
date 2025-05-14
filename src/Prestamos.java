@@ -97,10 +97,29 @@ public class Prestamos {
             System.out.println("Error en la conexion");
         }
     }
-    public static void VerLibros(SesionActiva sesion){
-
+    public static boolean EstaPenalizado(SesionActiva sesion){
+        try {
+            Connection conn = conexion.ConectarBD();
+            String selectPenalizado = "SELECT * FROM clientes_1 WHERE id_usuario = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(selectPenalizado)){
+                stmt.setInt(1, sesion.getId());
+                ResultSet rsPenal = stmt.executeQuery();
+                if (rsPenal.next()) {
+                    if (rsPenal.getInt("Penalizado") == 1) {
+                    return true;
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("Error al comprobar la penalizacion");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error en la conexion");
+        }
+        return false;
     }
-    public static void DevolverLibro(SesionActiva sesion, int id_prestamo) {
+    public static boolean PrestamosMaximos(SesionActiva sesion){
         try {
             Connection conn = conexion.ConectarBD();
             String selectPenalizado = "SELECT COUNT(*) AS total_prestamos FROM prestamos WHERE id_usuario = ? AND devuelto = ?";
@@ -139,7 +158,6 @@ public class Prestamos {
             try (PreparedStatement stmt = conn.prepareStatement(updtPrestamo)) {
                 stmt.setInt(1, 1);
                 stmt.setInt(2, id_prestamo);
-    
                 int rsPrestamo = stmt.executeUpdate();
                 if (rsPrestamo == 1) {
                     String updtLibro = "UPDATE libros SET Ejemplares = Ejemplares + 1 WHERE id_libro = ?";
