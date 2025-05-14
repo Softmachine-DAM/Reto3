@@ -20,14 +20,18 @@ public class Empleados {
                     insertEmpleados();
                     break;
                 case 2:
-                actualizarEmpleados();
+                    actualizarEmpleados();
                     break;
                 case 3:
-                eliminarEmpleados();
+                    eliminarEmpleados();
                     break;
                 case 4:
+                verEmpleados();
                     break;
                 default:
+                    System.out.println("Introduzca una opcion valida");
+                    System.out.println("Pulse ENTER para continuar...");
+                    scanner.nextLine();
                     break;
             }
         } while (opcionUEM != 5);
@@ -105,12 +109,18 @@ public class Empleados {
             String str= "SELECT * FROM empleados";
             ResultSet rs = statement.executeQuery(str);
             while (rs.next()) {
+<<<<<<< HEAD
                 int idempleado = rs.getInt("");
                 String nombre = rs.getString("titulo");
                 String rol = rs.getString("anio_publicacion");
                 String contraseña = rs.getString("genero");
+=======
+                int idempleado = rs.getInt("id_empleado");
+                String nombre = rs.getString("nombre");
+                String rol = rs.getString("rol");
+>>>>>>> b563a2bc4896c753070062d12a0dcee63df1c2ad
                 System.out.println("ID: " + idempleado + " | Nombre: " + nombre + 
-                " | Rol: " + rol + " | Contraseña: " + contraseña);
+                " | Rol: " + rol + " ");
         } 
         }catch (Exception e) {
             e.printStackTrace();

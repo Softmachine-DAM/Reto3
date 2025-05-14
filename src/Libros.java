@@ -17,19 +17,22 @@ public class Libros {
 
             switch(opcionUEJ){
                 case 1:
-                insertLibros();
-                break;
+                    insertLibros();
+                    break;
                 case 2:
-                actualizarLibros();
-                break;
+                    actualizarLibros();
+                    break;
                 case 3:
-                eliminarLibros();
-                break;
+                    eliminarLibros();
+                    break;
                 case 4:
-                Prestamos.VerLibros(null);
-                break;
+                    VerLibros();
+                    break;
                 default:
-                break;
+                    System.out.println("Introduzca una opcion valida");
+                    System.out.println("Pulse ENTER para continuar...");
+                    scanner.nextLine();
+                    break;
             }
         } while (opcionUEJ != 5);
     }
@@ -99,6 +102,36 @@ public class Libros {
             scanner.nextLine();
         }catch(SQLException e){
             System.out.println("Error al eliminar el ejemplar");
+            System.out.println("Pulse ENTER para volver...");
+            scanner.nextLine();
+        }
+    }
+    public static void VerLibros(){
+        Scanner scanner = new Scanner(System.in);
+        try {
+            Connection conn = conexion.ConectarBD();
+            Statement statement = conn.createStatement();
+            String str= "SELECT * FROM libros";
+            ResultSet rs = statement.executeQuery(str);
+            while (rs.next()) {
+                int idLibro = rs.getInt("id_libro");
+                String titulo = rs.getString("titulo");
+                int anio = rs.getInt("anio_publicacion");
+                String genero = rs.getString("genero");
+                int idEditorial = rs.getInt("id_editorial");
+                int ejemplares = rs.getInt("Ejemplares");
+                System.out.println("ID: " + idLibro + " | Título: " + titulo + 
+                " | Año: " + anio + " | Género: " + genero +
+                " | Editorial: " + idEditorial +
+                " | Ejemplares: " + ejemplares);
+            }
+            System.out.println("Pulse ENTER para volver...");
+            scanner.nextLine(); 
+        }catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error en la conexion");
+            System.out.println("Pulse ENTER para volver...");
+            scanner.nextLine();
         }
     }
 }
