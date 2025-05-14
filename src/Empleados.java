@@ -105,7 +105,7 @@ public class Empleados {
             String str= "SELECT * FROM empleados";
             ResultSet rs = statement.executeQuery(str);
             while (rs.next()) {
-                int idempleado = rs.getInt("id_libro");
+                int idempleado = rs.getInt("");
                 String nombre = rs.getString("titulo");
                 String rol = rs.getString("anio_publicacion");
                 String contraseña = rs.getString("genero");
