@@ -23,7 +23,7 @@ public class conexion{
                     if (opcion == 1 || opcion == 2) {
                         System.out.print("Introduce tu numero ID: ");
                         id = validarNumero();
-                        if (id != 0) {
+                        if (id != -1) {
                             System.out.print("Introduce tu Contraseña: ");
                             contraseña = scanner.nextLine();     
                         }
@@ -32,7 +32,7 @@ public class conexion{
                     SesionActiva sesion = new SesionActiva(id, contraseña);
                     switch (opcion) {
                         case 1:
-                            if (id == 0){
+                            if (id == -1){
                                 System.out.println("No has introducido un numero id valido");
                                 System.out.println("Pulse ENTER para continuar...");
                                 scanner.nextLine();
@@ -49,7 +49,7 @@ public class conexion{
                             }
                             break;
                         case 2:
-                            if (id == 0){
+                            if (id == -1){
                                 System.out.println("No has introducido un numero id valido");
                                 System.out.println("Pulse ENTER para continuar...");
                                 scanner.nextLine();
@@ -78,7 +78,7 @@ public class conexion{
                             break;
                     }
                     System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
-                } while (opcion != 3);
+                } while (opcion != 0);
             }
         }catch(Exception e){
             //e.printStackTrace();
@@ -126,7 +126,7 @@ public class conexion{
         if (scanner.hasNextInt()) {
             numero = scanner.nextInt();
         } else {
-            numero = 0;
+            numero = -1;
         }
         return numero;
     }

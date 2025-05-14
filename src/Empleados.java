@@ -48,11 +48,15 @@ public class Empleados {
             String rol = scanner.nextLine();
             System.out.println("Introduce tu contraseña");
             String contraseña = scanner.nextLine();
-            String str="INSERT INTO empleados(nombre,rol,contraseña)";
-            str+="VALUES('"+nombre+"','"+rol+"','"+contraseña+"')";
-            Statement stmt=conn.createStatement();
-            stmt.executeUpdate(str);
-            System.out.println("Empleado Añadido");
+            if (nombre != "" && rol != "") {
+                String str="INSERT INTO empleados(nombre,rol,contraseña)";
+                str+="VALUES('"+nombre+"','"+rol+"','"+contraseña+"')";
+                Statement stmt=conn.createStatement();
+                stmt.executeUpdate(str);
+                System.out.println("Empleado Añadido");
+            }else{
+                System.out.println("Nombre y rol no pueden estar vacios");
+            }
             System.out.println("Pulse ENTER para continuar...");
             scanner.nextLine();
         }catch(SQLException e){

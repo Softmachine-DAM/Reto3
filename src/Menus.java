@@ -6,13 +6,13 @@ public class Menus {
         Scanner scanner = new Scanner(System.in);
         int opcionME = 0;
         do {
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nPortal de Clientes");
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nPortal de Empleados");
             System.out.println("******************");
             System.out.println("Elige una opción:");
             System.out.println("1. Clientes");
             System.out.println("2. Libros");
             System.out.println("3. Empleados");
-            System.out.println("4. Cerrar sesion");
+            System.out.println("0. Cerrar sesion");
             opcionME = conexion.validarNumero();
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
             switch (opcionME){
@@ -25,14 +25,13 @@ public class Menus {
                 case 3:
                     if (sesion.getId() == 250) {
                         Empleados.usoEmpleados();
-                        
                     } else {
                         System.out.println("No tienes permisos para modificar datos de los empleados");
                         System.out.println("Pulse ENTER para continuar...");
                         scanner.nextLine();
                     }
                     break;
-                case 4:
+                case 0:
                     sesion.setId(0);
                     sesion.setContraseña(null);
                     System.out.println("Se cerró la sesion correctamente");
@@ -41,13 +40,13 @@ public class Menus {
                     System.out.println("Opción no válida.");
                     break;
             }
-        } while (opcionME != 4);
+        } while (opcionME != 0);
     }
     public static void menuClientes(SesionActiva sesion){
         Scanner scanner = new Scanner(System.in);
         int opcionMC = 0;
         do {
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nPortal de Empleados");
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nPortal de Clientes");
             System.out.println("*******************");
             System.out.println("Elige una opción:");
             System.out.println("1. Prestamos pendientes");

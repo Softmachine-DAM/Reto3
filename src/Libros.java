@@ -54,7 +54,7 @@ public class Libros {
             System.out.println("Pulse ENTER para continuar...");
             scanner.nextLine();
         }catch(SQLException e){
-            System.out.println("Error al insertar Libro");
+            System.out.println("Error al insertar Libro, comprueba si el codigo introducido no se esta usando ya");
         }
     }
 
