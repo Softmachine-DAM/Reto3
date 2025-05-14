@@ -26,6 +26,7 @@ public class Empleados {
                     eliminarEmpleados();
                     break;
                 case 4:
+                verEmpleados();
                     break;
                 default:
                     System.out.println("Introduzca una opcion valida");
@@ -98,6 +99,25 @@ public class Empleados {
             scanner.nextLine();
         }catch(SQLException e){
             System.out.println("Error al eliminar al empleado");
+        }
+    }
+
+    public static void verEmpleados(){
+        try {
+            Connection conn = conexion.ConectarBD();
+            Statement statement = conn.createStatement();
+            String str= "SELECT * FROM empleados";
+            ResultSet rs = statement.executeQuery(str);
+            while (rs.next()) {
+                int idempleado = rs.getInt("id_empleado");
+                String nombre = rs.getString("nombre");
+                String rol = rs.getString("rol");
+                System.out.println("ID: " + idempleado + " | Nombre: " + nombre + 
+                " | Rol: " + rol + " ");
+        } 
+        }catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error en la conexion");
         }
     }
 }
