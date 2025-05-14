@@ -109,16 +109,9 @@ public class Empleados {
             String str= "SELECT * FROM empleados";
             ResultSet rs = statement.executeQuery(str);
             while (rs.next()) {
-<<<<<<< HEAD
-                int idempleado = rs.getInt("");
-                String nombre = rs.getString("titulo");
-                String rol = rs.getString("anio_publicacion");
-                String contraseña = rs.getString("genero");
-=======
                 int idempleado = rs.getInt("id_empleado");
                 String nombre = rs.getString("nombre");
                 String rol = rs.getString("rol");
->>>>>>> b563a2bc4896c753070062d12a0dcee63df1c2ad
                 System.out.println("ID: " + idempleado + " | Nombre: " + nombre + 
                 " | Rol: " + rol + " ");
         } 
