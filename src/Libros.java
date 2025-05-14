@@ -26,7 +26,7 @@ public class Libros {
                 eliminarLibros();
                 break;
                 case 4:
-                
+                Prestamos.VerLibros(null);
                 break;
                 default:
                 break;

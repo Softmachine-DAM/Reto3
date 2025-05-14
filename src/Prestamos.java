@@ -1,7 +1,4 @@
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Scanner;
 
 public class Prestamos {
@@ -139,8 +136,23 @@ public class Prestamos {
     public static void VerLibros(SesionActiva sesion){
         try {
             Connection conn = conexion.ConectarBD();
-
-        } catch (Exception e) {
+            Statement statement = conn.createStatement();
+            String str= "SELECT * FROM libros";
+            ResultSet rs = statement.executeQuery(str);
+            while (rs.next()) {
+                int idLibro = rs.getInt("id_libro");
+                String titulo = rs.getString("titulo");
+                int anio = rs.getInt("anio_publicacion");
+                String genero = rs.getString("genero");
+                int idEditorial = rs.getInt("id_editorial");
+                int idCategoria = rs.getInt("id_categoria");
+                int ejemplares = rs.getInt("Ejemplares");
+                System.out.println("ID: " + idLibro + " | Título: " + titulo + 
+                " | Año: " + anio + " | Género: " + genero +
+                " | Editorial: " + idEditorial + " | Categoría: " + idCategoria +
+                " | Ejemplares: " + ejemplares);
+        } 
+        }catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error en la conexion");
         }
