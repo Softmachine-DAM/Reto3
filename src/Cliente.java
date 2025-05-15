@@ -2,8 +2,7 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class Cliente{
-    public static void usoClientes(){
-        Scanner scanner = new Scanner(System.in);
+    public static void usoClientes(Scanner scanner, Connection conn){
         int opcionUC = 0;
         do {
             System.out.println("Elige una opción:");
@@ -12,20 +11,20 @@ public class Cliente{
             System.out.println("3. Eliminar Cliente");
             System.out.println("4. Ver Clientes");
             System.out.println("0.Volver");
-            opcionUC = conexion.validarNumero();
+            opcionUC = conexion.validarNumero(scanner);
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
             switch(opcionUC){
                 case 1:
-                    insertClientes();
+                    insertClientes(scanner, conn);
                     break;
                 case 2:
-                    actualizarClientes();
+                    actualizarClientes(scanner, conn);
                     break;
                 case 3:
-                    eliminarClientes();
+                    eliminarClientes(scanner, conn);
                     break;
                 case 4:
-                verClientes();
+                    verClientes(conn);
                     break;
                 case 0:
                     break;
@@ -37,38 +36,34 @@ public class Cliente{
             }
         } while (opcionUC != 0);
     }
-    public static void insertClientes(){
-        Scanner scanner = new Scanner(System.in);
+    public static void insertClientes(Scanner scanner, Connection conn){
         try{
-                Connection conn = conexion.ConectarBD();
-                System.out.println("Introduce el nombre del Cliente");
-                String nombre = scanner.nextLine();
-                System.out.println("Introduce los apellidos del Cliente");
-                String apellidos = scanner.nextLine();
-                System.out.println("Introduce el correo del Cliente");
-                String correo = scanner.nextLine();
-                System.out.println("Introduce el telefono del Cliente");
-                String telefono = scanner.nextLine();
-                System.out.println("Introduce la contraseña");
-                String contraseña = scanner.nextLine();
-                String str = "INSERT INTO clientes_1(Nombre,Apellidos,Correo,Telefono,Contraseña)";
-                str+= "VALUES ('"+ nombre +"','"+ apellidos +"','"+ correo +"','"+ telefono +"','"+ contraseña +"')";
-                Statement stmt=conn.createStatement();
-                stmt.executeUpdate(str);
-                System.out.println("Registro Añadido");
-                System.out.println("Pulse ENTER para continuar...");
-                scanner.nextLine();
-            }catch(SQLException e){
-                System.out.println("Error al insertar cliente");
+            System.out.println("Introduce el nombre del Cliente");
+            String nombre = scanner.nextLine();
+            System.out.println("Introduce los apellidos del Cliente");
+            String apellidos = scanner.nextLine();
+            System.out.println("Introduce el correo del Cliente");
+            String correo = scanner.nextLine();
+            System.out.println("Introduce el telefono del Cliente");
+            String telefono = scanner.nextLine();
+            System.out.println("Introduce la contraseña");
+            String contraseña = scanner.nextLine();
+            String str = "INSERT INTO clientes_1(Nombre,Apellidos,Correo,Telefono,Contraseña)";
+            str+= "VALUES ('"+ nombre +"','"+ apellidos +"','"+ correo +"','"+ telefono +"','"+ contraseña +"')";
+            Statement stmt=conn.createStatement();
+            stmt.executeUpdate(str);
+            System.out.println("Registro Añadido");
+            System.out.println("Pulse ENTER para continuar...");
+            scanner.nextLine();
+        }catch(SQLException e){
+            System.out.println("Error al insertar cliente");
         }
     }
 
-    public static void eliminarClientes(){
-        Scanner scanner = new Scanner(System.in);
+    public static void eliminarClientes(Scanner scanner, Connection conn){
         try{
             System.out.println("Introduce el id del usuario que quieres eliminar");
             String ID = scanner.nextLine();
-            Connection conn = conexion.ConectarBD();
             String str = "DELETE FROM clientes_1 WHERE ID ='" + ID +"'";
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
@@ -80,22 +75,20 @@ public class Cliente{
         }
     }
 
-    public static void actualizarClientes() {
-        Scanner scanner = new Scanner(System.in);
+    public static void actualizarClientes(Scanner scanner, Connection conn) {
         try{
             System.out.println("Introduce el ID del Cliente");
-                String ID = scanner.nextLine();
+            String ID = scanner.nextLine();
             System.out.println("Introduce el nombre del Cliente");
-                String nombre = scanner.nextLine();
-                System.out.println("Introduce los apellidos del Cliente");
-                String apellidos = scanner.nextLine();
-                System.out.println("Introduce el correo del Cliente");
-                String correo = scanner.nextLine();
-                System.out.println("Introduce el telefono del Cliente");
-                String telefono = scanner.nextLine();
-                System.out.println("Introduce la contraseña");
-                String contraseña = scanner.nextLine();
-            Connection conn = conexion.ConectarBD();
+            String nombre = scanner.nextLine();
+            System.out.println("Introduce los apellidos del Cliente");
+            String apellidos = scanner.nextLine();
+            System.out.println("Introduce el correo del Cliente");
+            String correo = scanner.nextLine();
+            System.out.println("Introduce el telefono del Cliente");
+            String telefono = scanner.nextLine();
+            System.out.println("Introduce la contraseña");
+            String contraseña = scanner.nextLine();
             String str = "UPDATE clientes_1 SET Nombre = '"+nombre+"', Apellidos='"+apellidos+"' ,Correo='"+correo+"',Telefono='"+telefono+"',Contraseña='"+contraseña+"' WHERE ID = '"+ ID +"'";
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
@@ -108,9 +101,8 @@ public class Cliente{
             scanner.nextLine();
         }
     }
-       public static void verClientes(){
+    public static void verClientes(Connection conn){
         try {
-            Connection conn = conexion.ConectarBD();
             Statement statement = conn.createStatement();
             String str= "SELECT * FROM clientes_1";
             ResultSet rs = statement.executeQuery(str);
@@ -124,7 +116,7 @@ public class Cliente{
                 int Penalizado = rs.getInt("penalizado");
                 System.out.println("Nombre: " + Nombre + " | Apellidos: " + Apellidos + 
                 " | Correo: " + Correo + " | Telefono: " + Telefono + " | Contraseña: " + Contraseña + " | ID:" + ID + " |Penalizado:" + Penalizado);
-        } 
+            } 
         }catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error en la conexion");

@@ -18,11 +18,11 @@ public class conexion{
                     System.out.println("1. Clientes");
                     System.out.println("2. Empleados");
                     System.out.println("0. Salir");
-                    opcion = validarNumero();
+                    opcion = validarNumero(scanner);
                     System.out.println("\n\n\n\n\n\n\n\n\n\n");
                     if (opcion == 1 || opcion == 2) {
                         System.out.print("Introduce tu numero ID: ");
-                        id = validarNumero();
+                        id = validarNumero(scanner);
                         if (id != -1) {
                             System.out.print("Introduce tu Contraseña: ");
                             contraseña = scanner.nextLine();     
@@ -37,10 +37,10 @@ public class conexion{
                                 System.out.println("Pulse ENTER para continuar...");
                                 scanner.nextLine();
                             }else if (loginUsuario(conn, "clientes_1", scanner, sesion, opcion)) {
-                                System.out.println("Inicio de sesión correcto. ¡Bienvenido " + obtenerNombreUsuario(conn, sesion, "clientes_1", opcion) + " al portal de clientes!");
+                                System.out.println("Inicio de sesión correcto. ¡Bienvenido " + obtenerNombreUsuario(conn, scanner, sesion, "clientes_1", opcion) + " al portal de clientes!");
                                 System.out.println("Pulse ENTER para continuar...");
                                 scanner.nextLine();
-                                Menus.menuClientes(sesion);
+                                Menus.menuClientes(scanner, sesion, conn);
                             } else {
                                 System.out.println("Usuario o contraseña incorrectos.");
                                 System.out.println("Se le enviara al menu principal.");
@@ -54,10 +54,10 @@ public class conexion{
                                 System.out.println("Pulse ENTER para continuar...");
                                 scanner.nextLine();
                             }else if (loginUsuario(conn, "empleados", scanner, sesion, opcion)) {
-                                System.out.println("Inicio de sesión correcto. ¡Bienvenido " + obtenerNombreUsuario(conn, sesion, "empleados", opcion) + " al portal de empleados!");
+                                System.out.println("Inicio de sesión correcto. ¡Bienvenido " + obtenerNombreUsuario(conn, scanner, sesion, "empleados", opcion) + " al portal de empleados!");
                                 System.out.println("Pulse ENTER para continuar...");
                                 scanner.nextLine();
-                                Menus.menuEmpleados(sesion);
+                                Menus.menuEmpleados(scanner, sesion, conn);
                             } else {
                                 System.out.println("Usuario o contraseña incorrectos.");
                                 System.out.println("Se le enviara al menu principal.");
@@ -68,7 +68,9 @@ public class conexion{
                         case 0:
                             System.out.println("Gracias por utilizar el programa");
                             System.out.println("Pulse ENTER para cerrar");
-                                scanner.nextLine();
+                            scanner.nextLine();
+                            scanner.close();
+                            conn.close();
                             System.exit(0);
                             break;
                         default:
@@ -102,7 +104,7 @@ public class conexion{
             return false;
         }
     }
-    public static String obtenerNombreUsuario(Connection conn, SesionActiva sesion, String tabla, int opcion) {
+    public static String obtenerNombreUsuario(Connection conn, Scanner scanner, SesionActiva sesion, String tabla, int opcion) {
         String select;
         if (opcion == 1) {
             select = "SELECT Nombre FROM " + tabla + " WHERE id = ?";
@@ -120,12 +122,13 @@ public class conexion{
         }
         return "Usuario desconocido";
     }
-    public static int validarNumero(){
-        Scanner scanner = new Scanner(System.in);
+    public static int validarNumero(Scanner scanner){
         int numero;
         if (scanner.hasNextInt()) {
             numero = scanner.nextInt();
+            scanner.nextLine();
         } else {
+            scanner.nextLine();
             numero = -1;
         }
         return numero;

@@ -2,10 +2,8 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class Prestamos {
-    public static void PrestamosPendientes(SesionActiva sesion){
-        Scanner scanner = new Scanner(System.in);
+    public static void PrestamosPendientes(Scanner scanner, SesionActiva sesion, Connection conn){
         try {
-            Connection conn = conexion.ConectarBD();
             String slctPrest = "SELECT * FROM prestamos WHERE id_usuario = ? AND devuelto = 0";
             try (PreparedStatement stmt = conn.prepareStatement(slctPrest)){
                 stmt.setInt(1, sesion.getId());
@@ -31,30 +29,30 @@ public class Prestamos {
                     int cont = 1;
                     System.out.println("Tienes pendiente de devolver los siguientes libros:");
                     System.out.println("Elige el que quieras devolver o selecciona la ultima opcion para salir");
-                    System.out.println(cont + ". " + ObtenerTituloLibro(prestamos.getId_libro1()));
+                    System.out.println(cont + ". " + ObtenerTituloLibro(prestamos.getId_libro1(), conn));
                     if (prestamos.getId2() != 0) {
                         cont++;
-                        System.out.println(cont + ". " + ObtenerTituloLibro(prestamos.getId_libro2()));
+                        System.out.println(cont + ". " + ObtenerTituloLibro(prestamos.getId_libro2(), conn));
                         if (prestamos.getId3() != 0) {
                             cont++;
-                            System.out.println(cont + ". " + ObtenerTituloLibro(prestamos.getId_libro3()));
+                            System.out.println(cont + ". " + ObtenerTituloLibro(prestamos.getId_libro3(), conn));
                         }
                     }
                     cont++;
                     System.out.println(cont + ". Ninguno");
-                    opcionDevolver = conexion.validarNumero();
+                    opcionDevolver = conexion.validarNumero(scanner);
                     System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
                     if (opcionDevolver == 1){
-                        DevolverLibro(sesion, prestamos.getId1());
+                        DevolverLibro(sesion, prestamos.getId1(), conn);
                         System.out.println("Pulse ENTER para continuar...");
                         scanner.nextLine();
                     }else if (cont == 3 && opcionDevolver == 2){
-                        DevolverLibro(sesion, prestamos.getId2());
+                        DevolverLibro(sesion, prestamos.getId2(), conn);
                         System.out.println("Se ha devuelto el libro correctamente");
                         System.out.println("Pulse ENTER para continuar...");
                         scanner.nextLine();
                     }else if (cont == 4 && opcionDevolver == 3){
-                        DevolverLibro(sesion, prestamos.getId3());
+                        DevolverLibro(sesion, prestamos.getId3(), conn);
                         System.out.println("Se ha devuelto el libro correctamente");
                         System.out.println("Pulse ENTER para continuar...");
                         scanner.nextLine();
@@ -73,15 +71,13 @@ public class Prestamos {
             System.out.println("Error en la conexion");
         }
     }
-    public static void PrestarLibro(SesionActiva sesion){
-        Scanner scanner = new Scanner(System.in);
-        if (EstaPenalizado(sesion) == false && PrestamosMaximos(sesion) == false) {
-            VerLibrosDisponibles(sesion);
+    public static void PrestarLibro(Scanner scanner, SesionActiva sesion, Connection conn){
+        if (EstaPenalizado(sesion, conn) == false && PrestamosMaximos(sesion, conn) == false) {
+            VerLibrosDisponibles(sesion, conn);
             System.out.println("\n\nIntroduce el id del libro que quieres coger prestado:");
-            int idLibro = conexion.validarNumero();
+            int idLibro = conexion.validarNumero(scanner);
             String selectLibro = "SELECT * from Libros where id_libro = ?";
-            try (Connection conn = conexion.ConectarBD();
-            PreparedStatement stmt = conn.prepareStatement(selectLibro)){
+            try (PreparedStatement stmt = conn.prepareStatement(selectLibro)){
                 stmt.setInt(1, idLibro);
                 try (ResultSet rsLibro = stmt.executeQuery();){
                     System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
@@ -111,20 +107,19 @@ public class Prestamos {
                 e.printStackTrace();
                 System.out.println("Error en la conexion");
             }
-        }else if (EstaPenalizado(sesion) == true) {
+        }else if (EstaPenalizado(sesion, conn) == true) {
             System.out.println("Estas penalizado, no puedes realizar ningun prestamo");
             System.out.println("Pulse ENTER para continuar...");
             scanner.nextLine();
-        }else if (PrestamosMaximos(sesion) == true) {
+        }else if (PrestamosMaximos(sesion, conn) == true) {
             System.out.println("Ya tienes prestados tres libros, devuelve alguno para poder prestar otro");
             System.out.println("Pulse ENTER para continuar...");
             scanner.nextLine();
         }
     }
-    public static boolean EstaPenalizado(SesionActiva sesion){
+    public static boolean EstaPenalizado(SesionActiva sesion, Connection conn){
         String selectPenalizado = "SELECT Penalizado FROM clientes_1 WHERE ID = ?";
-        try (Connection conn = conexion.ConectarBD();
-        PreparedStatement stmt = conn.prepareStatement(selectPenalizado)){
+        try (PreparedStatement stmt = conn.prepareStatement(selectPenalizado)){
             stmt.setInt(1, sesion.getId());
             try (ResultSet rsPenal = stmt.executeQuery();){
                 if (rsPenal.next()) {
@@ -142,10 +137,9 @@ public class Prestamos {
         }
         return false;
     }
-    public static boolean PrestamosMaximos(SesionActiva sesion){
+    public static boolean PrestamosMaximos(SesionActiva sesion, Connection conn){
         String selectPenalizado = "SELECT COUNT(*) AS total_prestamos FROM prestamos WHERE id_usuario = ? AND devuelto = ?";
-        try (Connection conn = conexion.ConectarBD();
-        PreparedStatement stmt = conn.prepareStatement(selectPenalizado)){
+        try(PreparedStatement stmt = conn.prepareStatement(selectPenalizado)){
             stmt.setInt(1, sesion.getId());
             stmt.setInt(2, 0);
             ResultSet rsPenal = stmt.executeQuery();
@@ -160,9 +154,8 @@ public class Prestamos {
         }
         return false;
     }
-    public static void VerLibrosDisponibles(SesionActiva sesion){
+    public static void VerLibrosDisponibles(SesionActiva sesion, Connection conn){
         try {
-            Connection conn = conexion.ConectarBD();
             Statement statement = conn.createStatement();
             String str= "SELECT * FROM libros WHERE Ejemplares>0";
             ResultSet rs = statement.executeQuery(str);
@@ -183,9 +176,8 @@ public class Prestamos {
             System.out.println("Error en la conexion");
         }
     }
-    public static void DevolverLibro(SesionActiva sesion, int id_prestamo) {
+    public static void DevolverLibro(SesionActiva sesion, int id_prestamo, Connection conn) {
         try {
-            Connection conn = conexion.ConectarBD();
             int id_libro = -1;
             String getLibro = "SELECT id_libro FROM prestamos WHERE id_prestamo = ?";
             try (PreparedStatement getStmt = conn.prepareStatement(getLibro)) {
@@ -228,9 +220,8 @@ public class Prestamos {
             e.printStackTrace();
         }
     }
-    public static String ObtenerTituloLibro(int idLibro){
+    public static String ObtenerTituloLibro(int idLibro, Connection conn){
         try {
-            Connection conn = conexion.ConectarBD();
             String slctLibro = "SELECT titulo from Libros WHERE id_libro = ?";
             try (PreparedStatement stmt = conn.prepareStatement(slctLibro)) {
                 stmt.setInt(1, idLibro);

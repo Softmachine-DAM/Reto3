@@ -2,8 +2,7 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class Empleados {
-    public static void usoEmpleados(){
-        Scanner scanner = new Scanner(System.in);
+    public static void usoEmpleados(Scanner scanner, Connection conn){
         int opcionUEM = 0;
         do {
             System.out.println("Elige una opción:");
@@ -12,21 +11,21 @@ public class Empleados {
             System.out.println("3. Eliminar Empleado");
             System.out.println("4. Ver Empleados");
             System.out.println("0. Volver");
-            opcionUEM = conexion.validarNumero();
+            opcionUEM = conexion.validarNumero(scanner);
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
 
             switch (opcionUEM) {
                 case 1:
-                    insertEmpleados();
+                    insertEmpleados(scanner, conn);
                     break;
                 case 2:
-                    actualizarEmpleados();
+                    actualizarEmpleados(scanner, conn);
                     break;
                 case 3:
-                    eliminarEmpleados();
+                    eliminarEmpleados(scanner, conn);
                     break;
                 case 4:
-                    verEmpleados();
+                    verEmpleados(conn);
                     break;
                 case 0:
                     break;
@@ -38,10 +37,8 @@ public class Empleados {
             }
         } while (opcionUEM != 0);
     }
-    public static void insertEmpleados(){
-        Scanner scanner = new Scanner(System.in);
+    public static void insertEmpleados(Scanner scanner, Connection conn){
         try{
-            Connection conn = conexion.ConectarBD();
             System.out.println("Introduce el nombre del empleado");
             String nombre = scanner.nextLine();
             System.out.println("Introduce el rol del empleado");
@@ -65,18 +62,16 @@ public class Empleados {
     }
 
 
-        public static void actualizarEmpleados(){
-        Scanner scanner = new Scanner(System.in);
+        public static void actualizarEmpleados(Scanner scanner, Connection conn){
         try{
             System.out.println("Introduce el ID del Empleado");
-                String ID = scanner.nextLine();
+            String ID = scanner.nextLine();
             System.out.println("Introduce el nombre del Empleado");
-                String nombre = scanner.nextLine();
-                System.out.println("Introduce el rol del empleado");
-                String rol = scanner.nextLine();
-                System.out.println("Introduce la contraseña");
-                String contraseña = scanner.nextLine();
-            Connection conn = conexion.ConectarBD();
+            String nombre = scanner.nextLine();
+            System.out.println("Introduce el rol del empleado");
+            String rol = scanner.nextLine();
+            System.out.println("Introduce la contraseña");
+            String contraseña = scanner.nextLine();
             String str = "UPDATE empleados SET nombre = '"+nombre+"', rol='"+rol+"' ,Contraseña='"+contraseña+"' WHERE id_empleado = '"+ ID +"'";
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
@@ -91,12 +86,10 @@ public class Empleados {
         }
     }
 
-    public static void eliminarEmpleados(){
-        Scanner scanner = new Scanner(System.in);
+    public static void eliminarEmpleados(Scanner scanner, Connection conn){
         try{
             System.out.println("Introduce el id del empleado que quieres eliminar");
             String ID = scanner.nextLine();
-            Connection conn = conexion.ConectarBD();
             String str= "DELETE FROM empleados WHERE id_empleado = '" + ID +"'";
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
@@ -108,9 +101,8 @@ public class Empleados {
         }
     }
 
-    public static void verEmpleados(){
+    public static void verEmpleados(Connection conn){
         try {
-            Connection conn = conexion.ConectarBD();
             Statement statement = conn.createStatement();
             String str= "SELECT * FROM empleados";
             ResultSet rs = statement.executeQuery(str);

@@ -1,9 +1,9 @@
 // import java.sql.*;
+import java.sql.Connection;
 import java.util.Scanner;
 
 public class Menus {
-    public static void menuEmpleados(SesionActiva sesion){
-        Scanner scanner = new Scanner(System.in);
+    public static void menuEmpleados(Scanner scanner, SesionActiva sesion, Connection conn){
         int opcionME = 0;
         do {
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nPortal de Empleados");
@@ -13,18 +13,18 @@ public class Menus {
             System.out.println("2. Libros");
             System.out.println("3. Empleados");
             System.out.println("0. Cerrar sesion");
-            opcionME = conexion.validarNumero();
+            opcionME = conexion.validarNumero(scanner);
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
             switch (opcionME){
                 case 1:
-                    Cliente.usoClientes();
+                    Cliente.usoClientes(scanner, conn);
                     break;
                 case 2:
-                    Libros.usoLibros();
+                    Libros.usoLibros(scanner, conn);
                     break;
                 case 3:
                     if (sesion.getId() == 250) {
-                        Empleados.usoEmpleados();
+                        Empleados.usoEmpleados(scanner, conn);
                     } else {
                         System.out.println("No tienes permisos para modificar datos de los empleados");
                         System.out.println("Pulse ENTER para continuar...");
@@ -42,8 +42,7 @@ public class Menus {
             }
         } while (opcionME != 0);
     }
-    public static void menuClientes(SesionActiva sesion){
-        Scanner scanner = new Scanner(System.in);
+    public static void menuClientes(Scanner scanner, SesionActiva sesion, Connection conn){
         int opcionMC = 0;
         do {
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nPortal de Clientes");
@@ -52,14 +51,14 @@ public class Menus {
             System.out.println("1. Prestamos pendientes");
             System.out.println("2. Prestar libro");
             System.out.println("0. Cerrar sesion");
-            opcionMC = conexion.validarNumero();
+            opcionMC = conexion.validarNumero(scanner);
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
             switch (opcionMC){
                 case 1:
-                    Prestamos.PrestamosPendientes(sesion);
+                    Prestamos.PrestamosPendientes(scanner, sesion, conn);
                     break;
                 case 2:
-                    Prestamos.PrestarLibro(sesion);
+                    Prestamos.PrestarLibro(scanner, sesion, conn);
                     break;
                 case 0:
                     sesion.setId(0);

@@ -2,8 +2,7 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class Libros {
-    public static void usoLibros(){
-        Scanner scanner = new Scanner(System.in);
+    public static void usoLibros(Scanner scanner, Connection conn){
         int opcionUEJ = 0;
         do {
             System.out.println("Elige una opción:");
@@ -12,21 +11,21 @@ public class Libros {
             System.out.println("3. Eliminar Libro");
             System.out.println("4. Ver Libros"); 
             System.out.println("0. Volver");
-            opcionUEJ = conexion.validarNumero();
+            opcionUEJ = conexion.validarNumero(scanner);
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
 
             switch(opcionUEJ){
                 case 1:
-                    insertLibros();
+                    insertLibros(scanner, conn);
                     break;
                 case 2:
-                    actualizarLibros();
+                    actualizarLibros(scanner, conn);
                     break;
                 case 3:
-                    eliminarLibros();
+                    eliminarLibros(scanner, conn);
                     break;
                 case 4:
-                    VerLibros();
+                    VerLibros(scanner, conn);
                     break;
                 case 0:
                     break;
@@ -38,10 +37,8 @@ public class Libros {
             }
         } while (opcionUEJ != 0);
     }
-    public static void insertLibros(){
-        Scanner scanner = new Scanner(System.in);
+    public static void insertLibros(Scanner scanner, Connection conn){
         try{
-            Connection conn = conexion.ConectarBD();
             System.out.println("Introduce el id del Libro");
             String id_libro = scanner.nextLine();
             System.out.println("Introduce el titulo del Libro");
@@ -69,25 +66,23 @@ public class Libros {
     }
 
 
-        public static void actualizarLibros() {
-        Scanner scanner = new Scanner(System.in);
+    public static void actualizarLibros(Scanner scanner, Connection conn) {
+        System.out.println("Introduce el id del Libro");
+        String ID = scanner.nextLine();
+        System.out.println("Introduce el titulo del Libro");
+        String titulo = scanner.nextLine();
+        System.out.println("Introduce el año de publicacion del Libro");
+        String anio_publicacion = scanner.nextLine();
+        System.out.println("Introduce el genero del Libro");
+        String genero = scanner.nextLine();
+        System.out.println("Introduce la id de la editorial del Libro");
+        String id_editorial = scanner.nextLine();
+        System.out.println("Introduce el id de la categoria del Libro");
+        String id_categoria = scanner.nextLine();
+        System.out.println("Introduce el nº de ejemplares del Libro");
+        String ejemplares = scanner.nextLine();
+        String str = "UPDATE libros SET titulo = '"+titulo+"', anio_publicacion ='"+anio_publicacion+"' ,genero='"+genero+"',id_editorial='"+id_editorial+"',id_categoria='"+id_categoria+"',Ejemplares='"+ejemplares+"' WHERE id_libro = '"+ ID +"'";
         try{
-            System.out.println("Introduce el id del Libro");
-            String ID = scanner.nextLine();
-            System.out.println("Introduce el titulo del Libro");
-            String titulo = scanner.nextLine();
-            System.out.println("Introduce el año de publicacion del Libro");
-            String anio_publicacion = scanner.nextLine();
-            System.out.println("Introduce el genero del Libro");
-            String genero = scanner.nextLine();
-            System.out.println("Introduce la id de la editorial del Libro");
-            String id_editorial = scanner.nextLine();
-            System.out.println("Introduce el id de la categoria del Libro");
-            String id_categoria = scanner.nextLine();
-            System.out.println("Introduce el nº de ejemplares del Libro");
-            String ejemplares = scanner.nextLine();
-            Connection conn = conexion.ConectarBD();
-            String str = "UPDATE libros SET titulo = '"+titulo+"', anio_publicacion ='"+anio_publicacion+"' ,genero='"+genero+"',id_editorial='"+id_editorial+"',id_categoria='"+id_categoria+"' WHERE id_libro = '"+ ID +"'";
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
             System.out.println("Cliente Actualizado");
@@ -102,9 +97,7 @@ public class Libros {
 
 
 
-    public static void eliminarLibros(){
-        Connection conn = conexion.ConectarBD();
-        Scanner scanner = new Scanner(System.in);
+    public static void eliminarLibros(Scanner scanner, Connection conn){
         try{
             System.out.println("Introduce el id del ejemplar que quieres eliminar");
             String ID = scanner.nextLine();
@@ -120,10 +113,8 @@ public class Libros {
             scanner.nextLine();
         }
     }
-    public static void VerLibros(){
-        Scanner scanner = new Scanner(System.in);
+    public static void VerLibros(Scanner scanner, Connection conn){
         try {
-            Connection conn = conexion.ConectarBD();
             Statement statement = conn.createStatement();
             String str= "SELECT * FROM libros";
             ResultSet rs = statement.executeQuery(str);
