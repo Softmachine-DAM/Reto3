@@ -6,12 +6,18 @@ public class Libros {
         int opcionUEJ = 0;
         do {
             System.out.println("\033[H\033[2J");
-            System.out.println("Elige una opción:");
-            System.out.println("1. Insertar Libro");
-            System.out.println("2. Actualizar Libro");
-            System.out.println("3. Eliminar Libro");
-            System.out.println("4. Ver Libros"); 
-            System.out.println("0. Volver");
+            System.out.println("╔══════════════════════════════════════════════╗");
+            System.out.println("║        MENÚ DE GESTIÓN DE LIBROS             ║");
+            System.out.println("╠══════════════════════════════════════════════╣");
+            System.out.println("║                                              ║");
+            System.out.println("║   1  Insertar Libro                          ║");
+            System.out.println("║   2  Actualizar Libro                        ║");
+            System.out.println("║   3  Eliminar Libro                          ║");
+            System.out.println("║   4  Ver Libros                              ║");
+            System.out.println("║   0  Volver                                  ║");
+            System.out.println("║                                              ║");
+            System.out.println("╚══════════════════════════════════════════════╝");
+            System.out.print("Elige una opción: ");
             opcionUEJ = conexion.validarNumero(scanner);
             System.out.println("\033[H\033[2J");
 

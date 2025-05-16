@@ -7,13 +7,17 @@ public class Menus {
         int opcionME = 0;
         do {
             System.out.println("\033[H\033[2J");
-            System.out.println("Portal de Empleados");
-            System.out.println("******************");
-            System.out.println("Elige una opción:");
-            System.out.println("1. Clientes");
-            System.out.println("2. Libros");
-            System.out.println("3. Empleados");
-            System.out.println("0. Cerrar sesion");
+            System.out.println("╔══════════════════════════════════════════════╗");
+            System.out.println("║           PORTAL DE EMPLEADOS                ║");
+            System.out.println("╠══════════════════════════════════════════════╣");
+            System.out.println("║                                              ║");
+            System.out.println("║   1  Clientes                                ║");
+            System.out.println("║   2  Libros                                  ║");
+            System.out.println("║   3  Empleados                               ║");
+            System.out.println("║   0  Cerrar sesión                           ║");
+            System.out.println("║                                              ║");
+            System.out.println("╚══════════════════════════════════════════════╝");
+            System.out.print("👉 Elige una opción: ");
             opcionME = conexion.validarNumero(scanner);
             System.out.println("\033[H\033[2J");
             switch (opcionME){
@@ -51,12 +55,16 @@ public class Menus {
         int opcionMC = 0;
         do {
             System.out.println("\033[H\033[2J");
-            System.out.println("Portal de Clientes");
-            System.out.println("*******************");
-            System.out.println("Elige una opción:");
-            System.out.println("1. Prestamos pendientes");
-            System.out.println("2. Prestar libro");
-            System.out.println("0. Cerrar sesion");
+            System.out.println("╔══════════════════════════════════════════════╗");
+            System.out.println("║            PORTAL DE CLIENTES                ║");
+            System.out.println("╠══════════════════════════════════════════════╣");
+            System.out.println("║                                              ║");
+            System.out.println("║   1  Préstamos pendientes                    ║");
+            System.out.println("║   2  Prestar libro                           ║");
+            System.out.println("║   0  Cerrar sesión                           ║");
+            System.out.println("║                                              ║");
+            System.out.println("╚══════════════════════════════════════════════╝");
+            System.out.print(" Elige una opción: ");
             opcionMC = conexion.validarNumero(scanner);
             System.out.println("\033[H\033[2J");
             switch (opcionMC){

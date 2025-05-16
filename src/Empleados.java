@@ -6,12 +6,18 @@ public class Empleados {
         int opcionUEM = 0;
         do {
             System.out.println("\033[H\033[2J");
-            System.out.println("Elige una opción:");
-            System.out.println("1. Insertar Empleado");
-            System.out.println("2. Actualizar Empleado");
-            System.out.println("3. Eliminar Empleado");
-            System.out.println("4. Ver Empleados");
-            System.out.println("0. Volver");
+            System.out.println("╔══════════════════════════════════════════════╗");
+            System.out.println("║      MENÚ DE GESTIÓN DE EMPLEADOS            ║");
+            System.out.println("╠══════════════════════════════════════════════╣");
+            System.out.println("║                                              ║");
+            System.out.println("║   1  Insertar Empleado                       ║");
+            System.out.println("║   2  Actualizar Empleado                     ║");
+            System.out.println("║   3  Eliminar Empleado                       ║");
+            System.out.println("║   4  Ver Empleados                           ║");
+            System.out.println("║   0  Volver                                  ║");
+            System.out.println("║                                              ║");
+            System.out.println("╚══════════════════════════════════════════════╝");
+            System.out.print("Elige una opción: ");
             opcionUEM = conexion.validarNumero(scanner);
             System.out.println("\033[H\033[2J");
 

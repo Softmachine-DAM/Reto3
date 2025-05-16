@@ -6,12 +6,18 @@ public class Cliente{
         int opcionUC = 0;
         do {
             System.out.println("\033[H\033[2J");
-            System.out.println("Elige una opción:");
-            System.out.println("1. Insertar Cliente");
-            System.out.println("2. Actualizar Cliente");
-            System.out.println("3. Eliminar Cliente");
-            System.out.println("4. Ver Clientes");
-            System.out.println("0.Volver");
+            System.out.println("╔════════════════════════════════════════════╗");
+            System.out.println("║       MENÚ DE GESTIÓN DE CLIENTES          ║");
+            System.out.println("╠════════════════════════════════════════════╣");
+            System.out.println("║                                            ║");
+            System.out.println("║   1  Insertar Cliente                      ║");
+            System.out.println("║   2  Actualizar Cliente                    ║");
+            System.out.println("║   3  Eliminar Cliente                      ║");
+            System.out.println("║   4  Ver Clientes                          ║");
+            System.out.println("║   0  Volver                                ║");
+            System.out.println("║                                            ║");
+            System.out.println("╚════════════════════════════════════════════╝");
+            System.out.print("Elige una opción: ");
             opcionUC = conexion.validarNumero(scanner);
             System.out.println("\033[H\033[2J");
             switch(opcionUC){

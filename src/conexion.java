@@ -12,12 +12,17 @@ public class conexion{
                 int id = 0;
                 String contraseña = "";
                 do {
-                    System.out.println("\nBienvenido al servicio de la Biblioteca de Muskiz");
-                    System.out.println("*************************************************");
-                    System.out.println("Elige tu tipo de Usuario:");
-                    System.out.println("1. Clientes");
-                    System.out.println("2. Empleados");
-                    System.out.println("0. Salir");
+                    System.out.println("╔══════════════════════════════════════════════════════╗");
+                    System.out.println("║ Bienvenido al Servicio de la Biblioteca de Muskiz    ║");
+                    System.out.println("╠══════════════════════════════════════════════════════╣");
+                    System.out.println("║ Elige tu tipo de Usuario:                            ║");
+                    System.out.println("║                                                      ║");
+                    System.out.println("║   1  Clientes                                        ║");
+                    System.out.println("║   2  Empleados                                       ║");
+                    System.out.println("║   0  Salir                                           ║");
+                    System.out.println("╚══════════════════════════════════════════════════════╝");
+                    System.out.print(" Opción: ");
+                    
                     opcion = validarNumero(scanner);
                     System.out.println("\033[H\033[2J");
                     if (opcion == 1 || opcion == 2) {
@@ -41,7 +46,7 @@ public class conexion{
                                 System.out.println("Pulse ENTER para continuar...");
                                 scanner.nextLine();
                                 Menus.menuClientes(scanner, sesion, conn);
-                                conn.close();
+                                
                             } else {
                                 System.out.println("Usuario o contraseña incorrectos.");
                                 System.out.println("Se le enviara al menu principal.");
@@ -59,7 +64,6 @@ public class conexion{
                                 System.out.println("Pulse ENTER para continuar...");
                                 scanner.nextLine();
                                 Menus.menuEmpleados(scanner, sesion, conn);
-                                conn.close();
                             } else {
                                 System.out.println("Usuario o contraseña incorrectos.");
                                 System.out.println("Se le enviara al menu principal.");
