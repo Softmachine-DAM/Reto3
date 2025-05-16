@@ -135,7 +135,7 @@ public class Libros {
                 " | Editorial: " + idEditorial +
                 " | Ejemplares: " + ejemplares);
             }
-            System.out.println("Pulse ENTER para volver...");
+            System.out.println("\nPulse ENTER para volver...");
             scanner.nextLine(); 
         }catch (Exception e) {
             e.printStackTrace();

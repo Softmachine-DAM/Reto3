@@ -24,7 +24,7 @@ public class Cliente{
                     eliminarClientes(scanner, conn);
                     break;
                 case 4:
-                    verClientes(conn);
+                    verClientes(conn, scanner);
                     break;
                 case 0:
                     break;
@@ -104,7 +104,7 @@ public class Cliente{
             scanner.nextLine();
         }
     }
-    public static void verClientes(Connection conn){
+    public static void verClientes(Connection conn, Scanner scanner){
         try {
             Statement statement = conn.createStatement();
             String str= "SELECT * FROM clientes_1";
@@ -120,6 +120,8 @@ public class Cliente{
                 System.out.println("Nombre: " + Nombre + " | Apellidos: " + Apellidos + 
                 " | Correo: " + Correo + " | Telefono: " + Telefono + " | Contraseña: " + Contraseña + " | ID:" + ID + " |Penalizado:" + Penalizado);
             } 
+            System.out.println("\nPulse ENTER para volver...");
+            scanner.nextLine();
         }catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error en la conexion");

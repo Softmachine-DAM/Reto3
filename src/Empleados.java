@@ -25,7 +25,7 @@ public class Empleados {
                     eliminarEmpleados(scanner, conn);
                     break;
                 case 4:
-                    verEmpleados(conn);
+                    verEmpleados(conn, scanner);
                     break;
                 case 0:
                     break;
@@ -105,7 +105,7 @@ public class Empleados {
         }
     }
 
-    public static void verEmpleados(Connection conn){
+    public static void verEmpleados(Connection conn, Scanner scanner){
         try {
             Statement statement = conn.createStatement();
             String str= "SELECT * FROM empleados";
@@ -117,6 +117,8 @@ public class Empleados {
                 System.out.println("ID: " + idempleado + " | Nombre: " + nombre + 
                 " | Rol: " + rol + " ");
         } 
+        System.out.println("\nPulse ENTER para continuar...");
+        scanner.nextLine();
         }catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error en la conexion");
