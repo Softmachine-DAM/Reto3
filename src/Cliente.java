@@ -57,6 +57,7 @@ public class Cliente{
             scanner.nextLine();
         }catch(SQLException e){
             System.out.println("Error al insertar cliente");
+            e.printStackTrace();
         }
     }
 

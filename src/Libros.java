@@ -85,11 +85,11 @@ public class Libros {
         try{
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
-            System.out.println("Cliente Actualizado");
+            System.out.println("Libro Actualizado");
             System.out.println("Pulse ENTER para continuar...");
             scanner.nextLine();
         }catch(SQLException e){
-            System.out.println("Error al actualizar datos del cliente");
+            System.out.println("Error al actualizar los datos del libro");
             System.out.println("Pulse ENTER para continuar...");
             scanner.nextLine();
         }
@@ -101,7 +101,7 @@ public class Libros {
         try{
             System.out.println("Introduce el id del ejemplar que quieres eliminar");
             String ID = scanner.nextLine();
-            String str = "DELETE FROM libros WHERE cod_ejemplar ='" + ID + "'";
+            String str = "DELETE FROM libros WHERE id_libro ='" + ID + "'";
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
             System.out.println("Ejemplar Eliminado");
