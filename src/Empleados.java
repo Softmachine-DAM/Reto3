@@ -12,7 +12,7 @@ public class Empleados {
             System.out.println("4. Ver Empleados");
             System.out.println("0. Volver");
             opcionUEM = conexion.validarNumero(scanner);
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("\033[H\033[2J");
 
             switch (opcionUEM) {
                 case 1:
