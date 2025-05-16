@@ -76,14 +76,14 @@ public class Prestamos {
             VerLibrosDisponibles(sesion, conn);
             System.out.println("\n\nIntroduce el id del libro que quieres coger prestado:");
             int idLibro = conexion.validarNumero(scanner);
-            String selectLibro = "SELECT * from Libros where id_libro = ?";
+            String selectLibro = "SELECT * from libros where id_libro = ?";
             try (PreparedStatement stmt = conn.prepareStatement(selectLibro)){
                 stmt.setInt(1, idLibro);
                 try (ResultSet rsLibro = stmt.executeQuery();){
                     System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
                     if (rsLibro.next()) {
-                        String insertPrest = "INSERT INTO Prestamos (id_usuario,id_libro,fecha_fin) values (?, ?, NOW() + INTERVAL 14 DAY)";
-                        String updateLibros = "UPDATE Libros SET Ejemplares = Ejemplares -1 WHERE id_libro = ?";
+                        String insertPrest = "INSERT INTO prestamos (id_usuario,id_libro,fecha_fin) values (?, ?, NOW() + INTERVAL 14 DAY)";
+                        String updateLibros = "UPDATE libros SET Ejemplares = Ejemplares -1 WHERE id_libro = ?";
                         PreparedStatement stmtPrest = conn.prepareStatement(insertPrest);
                         stmtPrest.setInt(1, sesion.getId());
                         stmtPrest.setInt(2, idLibro);
@@ -222,7 +222,7 @@ public class Prestamos {
     }
     public static String ObtenerTituloLibro(int idLibro, Connection conn){
         try {
-            String slctLibro = "SELECT titulo from Libros WHERE id_libro = ?";
+            String slctLibro = "SELECT titulo from libros WHERE id_libro = ?";
             try (PreparedStatement stmt = conn.prepareStatement(slctLibro)) {
                 stmt.setInt(1, idLibro);
                 ResultSet rsLibro = stmt.executeQuery();
