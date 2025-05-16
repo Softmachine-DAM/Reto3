@@ -41,7 +41,7 @@ public class Prestamos {
                     cont++;
                     System.out.println(cont + ". Ninguno");
                     opcionDevolver = conexion.validarNumero(scanner);
-                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
+                    System.out.println("\033[H\033[2J");
                     if (opcionDevolver == 1){
                         DevolverLibro(sesion, prestamos.getId1(), conn);
                         System.out.println("Pulse ENTER para continuar...");
@@ -80,7 +80,7 @@ public class Prestamos {
             try (PreparedStatement stmt = conn.prepareStatement(selectLibro)){
                 stmt.setInt(1, idLibro);
                 try (ResultSet rsLibro = stmt.executeQuery();){
-                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
+                    System.out.println("\033[H\033[2J");
                     if (rsLibro.next()) {
                         String insertPrest = "INSERT INTO prestamos (id_usuario,id_libro,fecha_fin) values (?, ?, NOW() + INTERVAL 14 DAY)";
                         String updateLibros = "UPDATE libros SET Ejemplares = Ejemplares -1 WHERE id_libro = ?";
@@ -202,7 +202,7 @@ public class Prestamos {
                     try (PreparedStatement stmt1 = conn.prepareStatement(updtLibro)) {
                         stmt1.setInt(1, id_libro);
                         stmt1.executeUpdate();
-                        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
+                        System.out.println("\033[H\033[2J");
                         System.out.println("Se ha devuelto el libro");
                     } catch (SQLException exception) {
                         System.out.println("Error al añadir el ejemplar");

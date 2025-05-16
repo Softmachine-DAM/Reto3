@@ -12,7 +12,7 @@ public class Libros {
             System.out.println("4. Ver Libros"); 
             System.out.println("0. Volver");
             opcionUEJ = conexion.validarNumero(scanner);
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("\033[H\033[2J");
 
             switch(opcionUEJ){
                 case 1:

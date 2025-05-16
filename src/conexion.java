@@ -19,7 +19,7 @@ public class conexion{
                     System.out.println("2. Empleados");
                     System.out.println("0. Salir");
                     opcion = validarNumero(scanner);
-                    System.out.println("\n\n\n\n\n\n\n\n\n\n");
+                    System.out.println("\033[H\033[2J");
                     if (opcion == 1 || opcion == 2) {
                         System.out.print("Introduce tu numero ID: ");
                         id = validarNumero(scanner);
@@ -27,7 +27,7 @@ public class conexion{
                             System.out.print("Introduce tu Contraseña: ");
                             contraseña = scanner.nextLine();     
                         }
-                    System.out.println("\n\n\n\n\n\n\n\n\n\n");
+                    System.out.println("\033[H\033[2J");
                     }
                     SesionActiva sesion = new SesionActiva(id, contraseña);
                     switch (opcion) {
@@ -79,7 +79,7 @@ public class conexion{
                             scanner.nextLine();
                             break;
                     }
-                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
+                    System.out.println("\033[H\033[2J");
                 } while (opcion != 0);
             }
         }catch(Exception e){
@@ -94,7 +94,7 @@ public class conexion{
         }else{
             str = "SELECT * FROM " + tabla + " WHERE id_empleado = ? AND contraseña = ?";
         }
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.println("\033[H\033[2J");
         try (PreparedStatement stmt = conn.prepareStatement(str)) {
             stmt.setInt(1, sesion.getId());
             stmt.setString(2, sesion.getContraseña());
