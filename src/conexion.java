@@ -136,22 +136,14 @@ public class conexion{
         return numero;
     }
     public static Connection ConectarBD(){
-        String ip = "193.203.168.4";
-	    int port = 3306;
-	    String BBDD = "u237486760_reto_3";
-	    String user = "u237486760_adminMarkel";
-	    String password = "8a=rsLbwCxC:";
-	    String url = "jdbc:mysql://" + ip + ":" + port + "/" + BBDD + "?autoReconnect=true&useSSL=false&serverTimezone=UTC";;
-	    String driver = "com.mysql.cj.jdbc.Driver";
-
+        String url="jdbc:mysql://127.0.0.1:3306/biblioteca";
+        String user="Grupo3";
+        String password="Reto3";
         Connection conn = null;
         try {
-            Class.forName(driver);
             conn = DriverManager.getConnection(url,user,password);
         } catch (SQLException e) {
             System.out.println("Error en la conexion");
-        }catch(ClassNotFoundException e) {
-            System.out.println("No se encontró el driver JDBC: " + e.getMessage());
         }
         return conn;
     }
