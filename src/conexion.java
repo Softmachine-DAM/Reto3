@@ -36,7 +36,7 @@ public class conexion{
                                 System.out.println("No has introducido un numero id valido");
                                 System.out.println("Pulse ENTER para continuar...");
                                 scanner.nextLine();
-                            }else if (loginUsuario(conn, "clientes_1", scanner, sesion, opcion)) {
+                            }else if (loginUsuario(conn, "clientes_1", scanner, sesion)) {
                                 System.out.println("Inicio de sesión correcto. ¡Bienvenido " + obtenerNombreUsuario(conn, scanner, sesion, "clientes_1", opcion) + " al portal de clientes!");
                                 System.out.println("Pulse ENTER para continuar...");
                                 scanner.nextLine();
@@ -53,7 +53,7 @@ public class conexion{
                                 System.out.println("No has introducido un numero id valido");
                                 System.out.println("Pulse ENTER para continuar...");
                                 scanner.nextLine();
-                            }else if (loginUsuario(conn, "empleados", scanner, sesion, opcion)) {
+                            }else if (loginUsuario(conn, "empleados", scanner, sesion)) {
                                 System.out.println("Inicio de sesión correcto. ¡Bienvenido " + obtenerNombreUsuario(conn, scanner, sesion, "empleados", opcion) + " al portal de empleados!");
                                 System.out.println("Pulse ENTER para continuar...");
                                 scanner.nextLine();
@@ -67,7 +67,7 @@ public class conexion{
                             break;
                         case 0:
                             System.out.println("Gracias por utilizar el programa");
-                            System.out.println("Pulse ENTER para cerrar");
+                            System.out.println("Pulse ENTER para cerrar...");
                             scanner.nextLine();
                             scanner.close();
                             conn.close();
@@ -87,9 +87,9 @@ public class conexion{
             System.out.print("Error en la conexión ");
         }
     }
-    public static boolean loginUsuario(Connection conn, String tabla, Scanner scanner, SesionActiva sesion, int opcion) {
+    public static boolean loginUsuario(Connection conn, String tabla, Scanner scanner, SesionActiva sesion) {
         String str = "";
-        if (opcion == 1) {
+        if (tabla == "clientes_1") {
             str = "SELECT * FROM " + tabla + " WHERE ID = ? AND Contraseña = ?";
         }else{
             str = "SELECT * FROM " + tabla + " WHERE id_empleado = ? AND contraseña = ?";

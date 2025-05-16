@@ -35,9 +35,13 @@ public class Menus {
                     sesion.setId(0);
                     sesion.setContraseña(null);
                     System.out.println("Se cerró la sesion correctamente");
+                    System.out.println("Pulse ENTER para continuar...");
+                    scanner.nextLine();
                     break;
                 default:
                     System.out.println("Opción no válida.");
+                    System.out.println("Pulse ENTER para continuar...");
+                    scanner.nextLine();
                     break;
             }
         } while (opcionME != 0);
@@ -64,9 +68,13 @@ public class Menus {
                     sesion.setId(0);
                     sesion.setContraseña(null);
                     System.out.println("Se cerró la sesion correctamente");
+                    System.out.println("Pulse ENTER para continuar...");
+                    scanner.nextLine();
                     break;
                 default:
                     System.out.println("Opción no válida.");
+                    System.out.println("Pulse ENTER para continuar...");
+                    scanner.nextLine();
                     break;
             }
         } while (opcionMC != 0);
