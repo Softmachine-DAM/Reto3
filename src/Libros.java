@@ -33,6 +33,7 @@ public class Libros {
                     System.out.println("Introduzca una opcion valida");
                     System.out.println("Pulse ENTER para continuar...");
                     scanner.nextLine();
+                    System.out.println("\033[H\033[2J");
                     break;
             }
         } while (opcionUEJ != 0);
@@ -57,11 +58,12 @@ public class Libros {
             str+="VALUES('"+id_libro+"','"+titulo+"','"+anio_publicacion+"','"+genero+"','"+id_editorial+"','"+id_categoria+"','"+ejemplares+"')";
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
-            conn.close();
+            System.out.println("\033[H\033[2J");
             System.out.println("Libro Añadido");
             System.out.println("Pulse ENTER para continuar...");
             scanner.nextLine();
         }catch(SQLException e){
+            System.out.println("\033[H\033[2J");
             System.out.println("Error al insertar Libro, comprueba si el codigo introducido no se esta usando ya");
         }
     }
@@ -86,7 +88,7 @@ public class Libros {
         try{
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
-            conn.close();
+            System.out.println("\033[H\033[2J");
             System.out.println("Libro Actualizado");
             System.out.println("Pulse ENTER para continuar...");
             scanner.nextLine();
@@ -106,7 +108,7 @@ public class Libros {
             String str = "DELETE FROM libros WHERE id_libro ='" + ID + "'";
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
-            conn.close();
+            System.out.println("\033[H\033[2J");
             System.out.println("Ejemplar Eliminado");
             System.out.println("Pulse ENTER para continuar...");
             scanner.nextLine();

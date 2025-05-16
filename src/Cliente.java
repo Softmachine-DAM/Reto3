@@ -52,6 +52,7 @@ public class Cliente{
             str+= "VALUES ('"+ nombre +"','"+ apellidos +"','"+ correo +"','"+ telefono +"','"+ contraseña +"')";
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
+            System.out.println("\033[H\033[2J");
             System.out.println("Registro Añadido");
             System.out.println("Pulse ENTER para continuar...");
             scanner.nextLine();
