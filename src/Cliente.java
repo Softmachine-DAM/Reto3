@@ -5,6 +5,7 @@ public class Cliente{
     public static void usoClientes(Scanner scanner, Connection conn){
         int opcionUC = 0;
         do {
+            System.out.println("\033[H\033[2J");
             System.out.println("Elige una opción:");
             System.out.println("1. Insertar Cliente");
             System.out.println("2. Actualizar Cliente");
@@ -53,7 +54,6 @@ public class Cliente{
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
             System.out.println("\033[H\033[2J");
-            conn.close();
             System.out.println("Registro Añadido");
             System.out.println("Pulse ENTER para continuar...");
             scanner.nextLine();
@@ -71,7 +71,6 @@ public class Cliente{
             String str = "DELETE FROM clientes_1 WHERE ID ='" + ID +"'";
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
-            conn.close();
             System.out.println("Cliente Eliminado");
             System.out.println("Pulse ENTER para continuar...");
             scanner.nextLine();
@@ -97,11 +96,11 @@ public class Cliente{
             String str = "UPDATE clientes_1 SET Nombre = '"+nombre+"', Apellidos='"+apellidos+"' ,Correo='"+correo+"',Telefono='"+telefono+"',Contraseña='"+contraseña+"' WHERE ID = '"+ ID +"'";
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
-            conn.close();
             System.out.println("Cliente Actualizado");
             System.out.println("Pulse ENTER para continuar...");
             scanner.nextLine();
         }catch(SQLException e){
+            e.printStackTrace();
             System.out.println("Error al actualizar datos del cliente");
             System.out.println("Pulse ENTER para continuar...");
             scanner.nextLine();

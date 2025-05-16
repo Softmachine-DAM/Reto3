@@ -5,6 +5,7 @@ public class Empleados {
     public static void usoEmpleados(Scanner scanner, Connection conn){
         int opcionUEM = 0;
         do {
+            System.out.println("\033[H\033[2J");
             System.out.println("Elige una opción:");
             System.out.println("1. Insertar Empleado");
             System.out.println("2. Actualizar Empleado");

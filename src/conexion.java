@@ -41,6 +41,7 @@ public class conexion{
                                 System.out.println("Pulse ENTER para continuar...");
                                 scanner.nextLine();
                                 Menus.menuClientes(scanner, sesion, conn);
+                                conn.close();
                             } else {
                                 System.out.println("Usuario o contraseña incorrectos.");
                                 System.out.println("Se le enviara al menu principal.");
@@ -58,6 +59,7 @@ public class conexion{
                                 System.out.println("Pulse ENTER para continuar...");
                                 scanner.nextLine();
                                 Menus.menuEmpleados(scanner, sesion, conn);
+                                conn.close();
                             } else {
                                 System.out.println("Usuario o contraseña incorrectos.");
                                 System.out.println("Se le enviara al menu principal.");
