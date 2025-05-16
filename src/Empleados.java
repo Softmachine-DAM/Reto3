@@ -50,7 +50,6 @@ public class Empleados {
                 str+="VALUES('"+nombre+"','"+rol+"','"+contraseña+"')";
                 Statement stmt=conn.createStatement();
                 stmt.executeUpdate(str);
-                conn.close();
                 System.out.println("Empleado Añadido");
             }else{
                 System.out.println("Nombre y rol no pueden estar vacios");
@@ -76,7 +75,6 @@ public class Empleados {
             String str = "UPDATE empleados SET nombre = '"+nombre+"', rol='"+rol+"' ,Contraseña='"+contraseña+"' WHERE id_empleado = '"+ ID +"'";
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
-            conn.close();
             System.out.println("Empleado Actualizado");
             System.out.println("Pulse ENTER para continuar...");
             scanner.nextLine();
@@ -95,7 +93,6 @@ public class Empleados {
             String str= "DELETE FROM empleados WHERE id_empleado = '" + ID +"'";
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
-            conn.close();
             System.out.println("Empleado Eliminado");
             System.out.println("Pulse ENTER para continuar...");
             scanner.nextLine();

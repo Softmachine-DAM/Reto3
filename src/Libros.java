@@ -57,7 +57,6 @@ public class Libros {
             str+="VALUES('"+id_libro+"','"+titulo+"','"+anio_publicacion+"','"+genero+"','"+id_editorial+"','"+id_categoria+"','"+ejemplares+"')";
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
-            conn.close();
             System.out.println("Libro Añadido");
             System.out.println("Pulse ENTER para continuar...");
             scanner.nextLine();
@@ -86,7 +85,6 @@ public class Libros {
         try{
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
-            conn.close();
             System.out.println("Libro Actualizado");
             System.out.println("Pulse ENTER para continuar...");
             scanner.nextLine();
@@ -106,7 +104,6 @@ public class Libros {
             String str = "DELETE FROM libros WHERE id_libro ='" + ID + "'";
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
-            conn.close();
             System.out.println("Ejemplar Eliminado");
             System.out.println("Pulse ENTER para continuar...");
             scanner.nextLine();
