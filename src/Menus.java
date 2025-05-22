@@ -17,7 +17,7 @@ public class Menus {
             System.out.println("║   0  Cerrar sesión                           ║");
             System.out.println("║                                              ║");
             System.out.println("╚══════════════════════════════════════════════╝");
-            System.out.print("👉 Elige una opción: ");
+            System.out.print("Elige una opción: ");
             opcionME = conexion.validarNumero(scanner);
             System.out.println("\033[H\033[2J");
             switch (opcionME){
