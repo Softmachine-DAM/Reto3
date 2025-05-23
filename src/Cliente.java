@@ -106,12 +106,27 @@ public class Cliente{
             String telefono = scanner.nextLine();
             System.out.println("Introduce la contraseña");
             String contraseña = scanner.nextLine();
-            String str = "UPDATE clientes_1 SET Nombre = '"+nombre+"', Apellidos='"+apellidos+"' ,Correo='"+correo+"',Telefono='"+telefono+"',Contraseña='"+contraseña+"' WHERE ID = '"+ ID +"'";
+            if(correo.contains("@")){
+            String str = "UPDATE clientes_1 SET " +
+             "Nombre = UPPER('" + nombre + "'), " +
+             "Apellidos = UPPER('" + apellidos + "'), " +
+             "Correo = UPPER('" + correo + "'), " +
+             "Telefono = UPPER('" + telefono + "'), " +
+             "Contraseña = UPPER('" + contraseña + "') " +
+             "WHERE ID = '" + ID + "'";
+
+
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
             System.out.println("Cliente Actualizado");
             System.out.println("Pulse ENTER para continuar...");
             scanner.nextLine();
+            }else{
+                System.out.println("Introduce bien el correo");
+                 System.out.println("Pulse ENTER para continuar...");
+                scanner.nextLine();
+                return;
+            }
         }catch(SQLException e){
             e.printStackTrace();
             System.out.println("Error al actualizar datos del cliente");
