@@ -56,13 +56,20 @@ public class Cliente{
             System.out.println("Introduce la contraseña");
             String contraseña = scanner.nextLine();
             String str = "INSERT INTO clientes_1(Nombre,Apellidos,Correo,Telefono,Contraseña)";
-            str+= "VALUES ('"+ nombre +"','"+ apellidos +"','"+ correo +"','"+ telefono +"','"+ contraseña +"')";
+            str+= "VALUES (" +"UPPER('" + nombre + "'), " +"UPPER('" + apellidos + "'), " +"UPPER('" + correo + "'), " +"UPPER('" + telefono + "'), " +"UPPER('" + contraseña + "')" + ")";
+            if(correo.contains("@")){
             Statement stmt=conn.createStatement();
             stmt.executeUpdate(str);
             System.out.println("\033[H\033[2J");
             System.out.println("Registro Añadido");
             System.out.println("Pulse ENTER para continuar...");
             scanner.nextLine();
+            }else{
+                System.out.println("Introduce bien el correo");
+                System.out.println("Pulse ENTER para continuar...");
+                scanner.nextLine();
+                return;
+            }
         }catch(SQLException e){
             System.out.println("Error al insertar cliente");
             e.printStackTrace();
